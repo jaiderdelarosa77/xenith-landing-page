@@ -1,0 +1,97 @@
+
+import { HTMLAttributes, forwardRef } from 'react'
+import { cn } from '@/lib/utils/cn'
+
+interface CardProps extends HTMLAttributes<HTMLDivElement> {
+  variant?: 'default' | 'glass' | 'gradient'
+}
+
+const Card = forwardRef<HTMLDivElement, CardProps>(
+  ({ className, variant = 'default', ...props }, ref) => {
+    const variants = {
+      default: 'bg-gray-900/50 border border-gray-800',
+      glass: 'glass',
+      gradient: 'bg-gradient-to-br from-gray-900 to-gray-800 border border-violet-500/20',
+    }
+
+    return (
+      <div
+        ref={ref}
+        className={cn(
+          'rounded-xl p-6 shadow-lg',
+          'transition-all duration-200',
+          variants[variant],
+          className
+        )}
+        {...props}
+      />
+    )
+  }
+)
+Card.displayName = 'Card'
+
+const CardHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={cn('flex flex-col space-y-1.5 mb-4', className)}
+      {...props}
+    />
+  )
+)
+CardHeader.displayName = 'CardHeader'
+
+const CardTitle = forwardRef<HTMLHeadingElement, HTMLAttributes<HTMLHeadingElement>>(
+  ({ className, ...props }, ref) => (
+    <h3
+      ref={ref}
+      className={cn('text-xl font-semibold text-gray-100', className)}
+      {...props}
+    />
+  )
+)
+CardTitle.displayName = 'CardTitle'
+
+const CardDescription = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLParagraphElement>>(
+  ({ className, ...props }, ref) => (
+    <p
+      ref={ref}
+      className={cn('text-sm text-gray-400', className)}
+      {...props}
+    />
+  )
+)
+CardDescription.displayName = 'CardDescription'
+
+const CardContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={cn('', className)}
+      {...props}
+    />
+  )
+)
+CardContent.displayName = 'CardContent'
+
+const CardFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={cn('flex items-center mt-4 pt-4 border-t border-gray-800', className)}
+      {...props}
+    />
+  )
+)
+CardFooter.displayName = 'CardFooter'
+
+// Compound component pattern
+const CardWithSubComponents = Object.assign(Card, {
+  Header: CardHeader,
+  Title: CardTitle,
+  Description: CardDescription,
+  Content: CardContent,
+  Footer: CardFooter,
+})
+
+export { CardWithSubComponents as Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }

@@ -1,26 +1,151 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Primary Colors - Purple/Violet Accent Theme */
+  --color-primary: 139 92 246; /* violet-500 */
+  --color-primary-dark: 124 58 237; /* violet-600 */
+  --color-primary-light: 167 139 250; /* violet-400 */
+
+  --color-secondary: 99 102 241; /* indigo-500 */
+
+  /* Backgrounds */
+  --color-background: 10 10 10; /* near black */
+  --color-surface: 26 26 26; /* dark gray */
+  --color-surface-hover: 38 38 38; /* lighter gray */
+
+  /* Text */
+  --color-text: 237 237 237; /* off-white */
+  --color-text-muted: 163 163 163; /* gray-400 */
+
+  /* Borders */
+  --color-border: 38 38 38; /* subtle border */
+  --color-border-focus: 139 92 246; /* violet on focus */
+
+  /* Status Colors */
+  --color-success: 16 185 129; /* green-500 */
+  --color-warning: 245 158 11; /* amber-500 */
+  --color-error: 239 68 68; /* red-500 */
+
+  /* Spacing */
+  --spacing-navbar: 4rem;
+  --spacing-sidebar: 16rem;
+
+  /* Animations */
+  --animation-fast: 150ms;
+  --animation-normal: 250ms;
+  --animation-slow: 350ms;
+
+  /* Border Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+
+  /* Shadows */
+  --shadow-glow: 0 0 20px rgba(139, 92, 246, 0.3);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  /* Map to Tailwind colors */
+  --color-background: rgb(var(--color-background));
+  --color-foreground: rgb(var(--color-text));
+  --color-primary: rgb(var(--color-primary));
+  --color-surface: rgb(var(--color-surface));
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+body {
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-text));
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Futuristic Glassmorphism Effect */
+.glass {
+  background: rgba(26, 26, 26, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.glass-strong {
+  background: rgba(26, 26, 26, 0.9);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+/* Gradient Backgrounds */
+.gradient-primary {
+  background: linear-gradient(135deg, rgb(139, 92, 246) 0%, rgb(99, 102, 241) 100%);
+}
+
+.gradient-radial {
+  background: radial-gradient(circle at center, rgb(139, 92, 246) 0%, transparent 70%);
+}
+
+/* Hover Glow Effect */
+.hover-glow {
+  transition: box-shadow var(--animation-normal) ease;
+}
+
+.hover-glow:hover {
+  box-shadow: var(--shadow-glow);
+}
+
+/* Text Gradient */
+.text-gradient {
+  background: linear-gradient(135deg, rgb(139, 92, 246), rgb(167, 139, 250));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Animated Border */
+@keyframes border-pulse {
+  0%, 100% {
+    border-color: rgba(139, 92, 246, 0.3);
+  }
+  50% {
+    border-color: rgba(139, 92, 246, 0.8);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.border-pulse {
+  animation: border-pulse 2s ease-in-out infinite;
+}
+
+/* Smooth Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(var(--color-background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--color-surface-hover));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--color-primary));
+}
+
+/* Focus Styles */
+*:focus-visible {
+  outline: 2px solid rgb(var(--color-primary));
+  outline-offset: 2px;
+}
+
+/* Selection */
+::selection {
+  background: rgba(139, 92, 246, 0.3);
+  color: rgb(var(--color-text));
 }
