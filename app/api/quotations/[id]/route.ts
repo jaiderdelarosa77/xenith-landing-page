@@ -57,6 +57,45 @@ export async function GET(
             },
           },
         },
+        groups: {
+          orderBy: { order: 'asc' },
+          include: {
+            group: {
+              select: {
+                id: true,
+                name: true,
+                description: true,
+                items: {
+                  include: {
+                    inventoryItem: {
+                      select: {
+                        id: true,
+                        serialNumber: true,
+                        assetTag: true,
+                        product: {
+                          select: {
+                            id: true,
+                            sku: true,
+                            name: true,
+                            brand: true,
+                            model: true,
+                            category: {
+                              select: {
+                                id: true,
+                                name: true,
+                                color: true,
+                              },
+                            },
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
       },
     })
 
@@ -94,7 +133,9 @@ export async function PUT(
 
     // Calculate totals
     let subtotal = new Decimal(0)
-    const items = validatedData.items.map((item, index) => {
+
+    // Process items
+    const items = (validatedData.items || []).map((item, index) => {
       const itemTotal = new Decimal(item.quantity).times(new Decimal(item.unitPrice))
       subtotal = subtotal.plus(itemTotal)
 
@@ -108,6 +149,22 @@ export async function PUT(
       }
     })
 
+    // Process groups
+    const groups = (validatedData.groups || []).map((group, index) => {
+      const groupTotal = new Decimal(group.quantity).times(new Decimal(group.unitPrice))
+      subtotal = subtotal.plus(groupTotal)
+
+      return {
+        groupId: group.groupId,
+        name: group.name,
+        description: group.description || null,
+        unitPrice: new Decimal(group.unitPrice),
+        quantity: group.quantity,
+        total: groupTotal,
+        order: items.length + index,
+      }
+    })
+
     const discount = validatedData.discount ? new Decimal(validatedData.discount) : new Decimal(0)
     const taxRate = validatedData.tax ? new Decimal(validatedData.tax) : new Decimal(16)
 
@@ -115,8 +172,11 @@ export async function PUT(
     const tax = subtotalAfterDiscount.times(taxRate).dividedBy(100)
     const total = subtotalAfterDiscount.plus(tax)
 
-    // Delete existing items and create new ones
+    // Delete existing items and groups
     await prisma.quotationItem.deleteMany({
+      where: { quotationId: id },
+    })
+    await prisma.quotationGroup.deleteMany({
       where: { quotationId: id },
     })
 
@@ -137,6 +197,9 @@ export async function PUT(
         terms: validatedData.terms || null,
         items: {
           create: items,
+        },
+        groups: {
+          create: groups,
         },
       },
       include: {
@@ -176,6 +239,45 @@ export async function PUT(
                     name: true,
                     brand: true,
                     model: true,
+                  },
+                },
+              },
+            },
+          },
+        },
+        groups: {
+          orderBy: { order: 'asc' },
+          include: {
+            group: {
+              select: {
+                id: true,
+                name: true,
+                description: true,
+                items: {
+                  include: {
+                    inventoryItem: {
+                      select: {
+                        id: true,
+                        serialNumber: true,
+                        assetTag: true,
+                        product: {
+                          select: {
+                            id: true,
+                            sku: true,
+                            name: true,
+                            brand: true,
+                            model: true,
+                            category: {
+                              select: {
+                                id: true,
+                                name: true,
+                                color: true,
+                              },
+                            },
+                          },
+                        },
+                      },
+                    },
                   },
                 },
               },

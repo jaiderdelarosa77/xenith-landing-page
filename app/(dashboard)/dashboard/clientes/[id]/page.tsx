@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { useClients } from '@/hooks/useClients'
 import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
-import { ArrowLeft, Edit, Mail, Phone, MapPin, Building2, FileText, Trash2 } from 'lucide-react'
+import { ArrowLeft, Edit, Mail, Phone, MapPin, Building2, FileText, Trash2, FileDown } from 'lucide-react'
 import { format } from 'date-fns'
 import { es } from 'date-fns/locale'
 
@@ -125,15 +125,32 @@ export default function ClientDetailPage({
                   </div>
                 )}
 
-                {clientData.taxId && (
+                {clientData.nit && (
                   <div className="flex items-start gap-3">
                     <FileText className="w-5 h-5 text-violet-400 mt-0.5" />
                     <div>
-                      <p className="text-sm text-gray-400">RFC / Tax ID</p>
-                      <p className="font-medium">{clientData.taxId}</p>
+                      <p className="text-sm text-gray-400">NIT / Documento</p>
+                      <p className="font-medium font-mono">{clientData.nit}</p>
                     </div>
                   </div>
                 )}
+
+                <div className="flex items-start gap-3">
+                  <FileDown className="w-5 h-5 text-violet-400 mt-0.5" />
+                  <div>
+                    <p className="text-sm text-gray-400">RUT</p>
+                    {clientData.rutUrl ? (
+                      <a href={clientData.rutUrl} target="_blank" rel="noopener noreferrer">
+                        <Button variant="outline" size="sm" className="mt-1">
+                          <FileDown className="w-4 h-4 mr-2" />
+                          Descargar RUT
+                        </Button>
+                      </a>
+                    ) : (
+                      <p className="text-gray-500 text-sm">No adjunto</p>
+                    )}
+                  </div>
+                </div>
 
                 {(clientData.address || clientData.city || clientData.country) && (
                   <div className="flex items-start gap-3 md:col-span-2">

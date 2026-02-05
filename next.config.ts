@@ -83,11 +83,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-
-  // Experimental security features
-  experimental: {
-    // Enable server actions with strict mode
-  },
 };
 
 export default nextConfig;

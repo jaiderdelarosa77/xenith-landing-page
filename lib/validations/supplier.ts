@@ -2,6 +2,7 @@ import { z } from 'zod'
 
 export const supplierSchema = z.object({
   name: z.string().min(2, 'El nombre debe tener al menos 2 caracteres'),
+  nit: z.string().optional(),
   contactName: z.string().optional(),
   email: z.string().email('Email inválido').optional().or(z.literal('')),
   phone: z.string().optional(),
@@ -10,6 +11,7 @@ export const supplierSchema = z.object({
   country: z.string().optional(),
   website: z.string().url('URL inválida').optional().or(z.literal('')),
   notes: z.string().optional(),
+  rutUrl: z.string().optional(),
 })
 
 export type SupplierFormData = z.infer<typeof supplierSchema>
@@ -17,6 +19,7 @@ export type SupplierFormData = z.infer<typeof supplierSchema>
 export type Supplier = {
   id: string
   name: string
+  nit: string | null
   contactName: string | null
   email: string | null
   phone: string | null
@@ -25,6 +28,7 @@ export type Supplier = {
   country: string | null
   website: string | null
   notes: string | null
+  rutUrl: string | null
   createdAt: Date
   updatedAt: Date
   _count?: {

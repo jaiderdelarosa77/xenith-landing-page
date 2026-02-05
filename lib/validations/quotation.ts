@@ -7,7 +7,15 @@ export const quotationItemSchema = z.object({
   unitPrice: z.number().min(0, 'El precio unitario debe ser positivo'),
 })
 
-export const quotationSchema = z.object({
+export const quotationGroupSchema = z.object({
+  groupId: z.string().min(1, 'El grupo es requerido'),
+  name: z.string().min(1, 'El nombre es requerido'),
+  description: z.string().optional().nullable(),
+  unitPrice: z.number().min(0, 'El precio debe ser positivo'),
+  quantity: z.number().min(1, 'La cantidad debe ser al menos 1'),
+})
+
+export const quotationSchemaBase = z.object({
   title: z.string().min(3, 'El título debe tener al menos 3 caracteres'),
   description: z.string().optional(),
   clientId: z.string().min(1, 'Debes seleccionar un cliente'),
@@ -18,11 +26,18 @@ export const quotationSchema = z.object({
   tax: z.string().optional(),
   notes: z.string().optional(),
   terms: z.string().optional(),
-  items: z.array(quotationItemSchema).min(1, 'Debes agregar al menos un item'),
+  items: z.array(quotationItemSchema),
+  groups: z.array(quotationGroupSchema),
 })
 
+export const quotationSchema = quotationSchemaBase.refine(
+  (data) => data.items.length > 0 || data.groups.length > 0,
+  { message: 'Debes agregar al menos un item o grupo', path: ['items'] }
+)
+
 export type QuotationItemFormData = z.infer<typeof quotationItemSchema>
-export type QuotationFormData = z.infer<typeof quotationSchema>
+export type QuotationGroupFormData = z.infer<typeof quotationGroupSchema>
+export type QuotationFormData = z.infer<typeof quotationSchemaBase>
 
 export type QuotationStatus = 'DRAFT' | 'SENT' | 'ACCEPTED' | 'REJECTED' | 'EXPIRED'
 
@@ -49,6 +64,45 @@ export type QuotationItem = {
       model: string | null
     }
   } | null
+}
+
+export type QuotationGroupItem = {
+  id: string
+  quotationId: string
+  groupId: string
+  name: string
+  description: string | null
+  unitPrice: number
+  quantity: number
+  total: number
+  order: number
+  createdAt: Date
+  updatedAt: Date
+  group?: {
+    id: string
+    name: string
+    description: string | null
+    items?: Array<{
+      id: string
+      inventoryItem?: {
+        id: string
+        serialNumber: string | null
+        assetTag: string | null
+        product?: {
+          id: string
+          sku: string
+          name: string
+          brand: string | null
+          model: string | null
+          category?: {
+            id: string
+            name: string
+            color: string | null
+          }
+        }
+      }
+    }>
+  }
 }
 
 export type Quotation = {
@@ -90,6 +144,7 @@ export type Quotation = {
     email: string
   }
   items: QuotationItem[]
+  groups?: QuotationGroupItem[]
 }
 
 export const statusLabels: Record<QuotationStatus, string> = {

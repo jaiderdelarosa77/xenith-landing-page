@@ -8,8 +8,9 @@ export const clientSchema = z.object({
   address: z.string().optional(),
   city: z.string().optional(),
   country: z.string().optional(),
-  taxId: z.string().optional(),
+  nit: z.string().optional(),
   notes: z.string().optional(),
+  rutUrl: z.string().optional(),
 })
 
 export type ClientFormData = z.infer<typeof clientSchema>
@@ -23,8 +24,9 @@ export type Client = {
   address: string | null
   city: string | null
   country: string | null
-  taxId: string | null
+  nit: string | null
   notes: string | null
+  rutUrl: string | null
   createdAt: Date
   updatedAt: Date
 }

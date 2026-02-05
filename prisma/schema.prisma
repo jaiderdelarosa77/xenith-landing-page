@@ -87,8 +87,9 @@ model Client {
   address   String?
   city      String?
   country   String?
-  taxId     String? // RFC or tax identification
+  nit       String?  // NIT o documento de identificacion
   notes     String?  @db.Text
+  rutUrl    String?  // URL del archivo RUT (para futuro)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -168,10 +169,11 @@ model Quotation {
   updatedAt       DateTime        @updatedAt
 
   // Relations
-  client        Client          @relation(fields: [clientId], references: [id], onDelete: Restrict)
-  project       Project?        @relation(fields: [projectId], references: [id], onDelete: SetNull)
-  createdByUser User            @relation(fields: [createdBy], references: [id], onDelete: Restrict)
+  client        Client           @relation(fields: [clientId], references: [id], onDelete: Restrict)
+  project       Project?         @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  createdByUser User             @relation(fields: [createdBy], references: [id], onDelete: Restrict)
   items         QuotationItem[]
+  groups        QuotationGroup[]
 
   @@index([clientId])
   @@index([projectId])
@@ -199,6 +201,29 @@ model QuotationItem {
   @@index([quotationId])
   @@index([inventoryItemId])
   @@map("quotation_items")
+}
+
+// Quotation groups - Para agregar paquetes de equipos a cotizaciones
+model QuotationGroup {
+  id          String   @id @default(cuid())
+  quotationId String
+  groupId     String
+  name        String   // Nombre personalizado (puede ser diferente al original)
+  description String?  @db.Text
+  unitPrice   Decimal  @db.Decimal(10, 2) // Precio editable del grupo
+  quantity    Int      @default(1)
+  total       Decimal  @db.Decimal(10, 2)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  quotation Quotation @relation(fields: [quotationId], references: [id], onDelete: Cascade)
+  group     ItemGroup @relation(fields: [groupId], references: [id], onDelete: Restrict)
+
+  @@index([quotationId])
+  @@index([groupId])
+  @@map("quotation_groups")
 }
 
 // Enums
@@ -293,10 +318,11 @@ model Category {
   @@map("categories")
 }
 
-// Supplier model - Proveedores
+// Supplier model - Contratistas (antes Proveedores)
 model Supplier {
   id          String   @id @default(cuid())
   name        String
+  nit         String?  // NIT o documento de identificación
   contactName String?
   email       String?
   phone       String?
@@ -305,13 +331,36 @@ model Supplier {
   country     String?
   website     String?
   notes       String?  @db.Text
+  rutUrl      String?  // URL del archivo RUT (para futuro)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
   // Relations
   products ProductSupplier[]
+  concepts Concept[]
 
   @@map("suppliers")
+}
+
+// Concept model - Conceptos de contratistas (servicios que ofrecen)
+model Concept {
+  id          String   @id @default(cuid())
+  name        String
+  description String?  @db.Text
+  supplierId  String?  // Contratista asociado (opcional)
+  unitPrice   Decimal? @db.Decimal(10, 2) // Precio de referencia
+  category    String?  // Categoria del servicio: audio, iluminacion, catering, etc.
+  notes       String?  @db.Text
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  supplier Supplier? @relation(fields: [supplierId], references: [id], onDelete: SetNull)
+
+  @@index([supplierId])
+  @@index([category])
+  @@map("concepts")
 }
 
 // Product model - Catálogo de productos (soft delete)
@@ -386,6 +435,7 @@ model InventoryItem {
   rfidTag        RfidTag?
   movements      InventoryMovement[]
   quotationItems QuotationItem[]
+  groups         ItemGroupItem[]
 
   @@index([productId])
   @@index([status])
@@ -493,4 +543,42 @@ model InventoryMovement {
   @@index([performedBy])
   @@index([createdAt])
   @@map("inventory_movements")
+}
+
+// =============================================
+// ITEM GROUPS (EQUIPMENT PACKAGES)
+// =============================================
+
+// ItemGroup - Grupos/Paquetes de equipos (ej: "Sistema de Audio Medio")
+model ItemGroup {
+  id          String   @id @default(cuid())
+  name        String
+  description String?  @db.Text
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  items      ItemGroupItem[]
+  quotations QuotationGroup[]
+
+  @@map("item_groups")
+}
+
+// ItemGroupItem - Relación entre grupos y items de inventario
+model ItemGroupItem {
+  id              String   @id @default(cuid())
+  groupId         String
+  inventoryItemId String
+  quantity        Int      @default(1)
+  notes           String?
+  createdAt       DateTime @default(now())
+
+  // Relations
+  group         ItemGroup     @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  inventoryItem InventoryItem @relation(fields: [inventoryItemId], references: [id], onDelete: Cascade)
+
+  @@unique([groupId, inventoryItemId])
+  @@index([groupId])
+  @@index([inventoryItemId])
+  @@map("item_group_items")
 }

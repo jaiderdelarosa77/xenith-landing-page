@@ -16,8 +16,10 @@ import {
   Tags,
   Radio,
   ArrowRightLeft,
-  Truck,
   FolderTree,
+  Package2,
+  UsersRound,
+  Briefcase,
 } from 'lucide-react'
 import { cn } from '@/lib/utils/cn'
 import { Button } from '@/components/ui/Button'
@@ -75,6 +77,11 @@ export function Sidebar({ isOpen = true, onClose }: SidebarProps) {
       icon: Tags,
     },
     {
+      name: 'Grupos',
+      href: '/dashboard/inventario/grupos',
+      icon: Package2,
+    },
+    {
       name: 'RFID',
       href: '/dashboard/inventario/rfid',
       icon: Radio,
@@ -86,16 +93,24 @@ export function Sidebar({ isOpen = true, onClose }: SidebarProps) {
     },
   ]
 
+  const tercerosNavigation = [
+    {
+      name: 'Contratistas',
+      href: '/dashboard/terceros/contratistas',
+      icon: UsersRound,
+    },
+    {
+      name: 'Conceptos',
+      href: '/dashboard/terceros/conceptos',
+      icon: Briefcase,
+    },
+  ]
+
   const configNavigation = [
     {
       name: 'Categorias',
       href: '/dashboard/categorias',
       icon: FolderTree,
-    },
-    {
-      name: 'Proveedores',
-      href: '/dashboard/proveedores',
-      icon: Truck,
     },
   ]
 
@@ -197,6 +212,36 @@ export function Sidebar({ isOpen = true, onClose }: SidebarProps) {
                         'flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200',
                         active
                           ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                          : 'text-gray-400 hover:text-white hover:bg-gray-900'
+                      )}
+                    >
+                      <item.icon className="w-5 h-5" />
+                      {item.name}
+                    </Link>
+                  </li>
+                )
+              })}
+            </ul>
+
+            {/* Terceros Section */}
+            <div className="mt-6 mb-2 px-4">
+              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider flex items-center gap-2">
+                <UsersRound className="w-3 h-3" />
+                Terceros
+              </p>
+            </div>
+            <ul className="space-y-1">
+              {tercerosNavigation.map((item) => {
+                const active = isActive(item.href)
+                return (
+                  <li key={item.name}>
+                    <Link
+                      href={item.href}
+                      onClick={onClose}
+                      className={cn(
+                        'flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200',
+                        active
+                          ? 'bg-orange-500/10 text-orange-400 border border-orange-500/20'
                           : 'text-gray-400 hover:text-white hover:bg-gray-900'
                       )}
                     >

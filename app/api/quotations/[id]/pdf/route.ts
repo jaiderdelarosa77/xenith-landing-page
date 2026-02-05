@@ -54,6 +54,38 @@ export async function GET(
             },
           },
         },
+        groups: {
+          orderBy: { order: 'asc' },
+          include: {
+            group: {
+              select: {
+                id: true,
+                name: true,
+                description: true,
+                items: {
+                  include: {
+                    inventoryItem: {
+                      select: {
+                        id: true,
+                        serialNumber: true,
+                        assetTag: true,
+                        product: {
+                          select: {
+                            id: true,
+                            sku: true,
+                            name: true,
+                            brand: true,
+                            model: true,
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
       },
     })
 

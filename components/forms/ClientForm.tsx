@@ -6,6 +6,8 @@ import { clientSchema, ClientFormData, Client } from '@/lib/validations/client'
 import { Input } from '@/components/ui/Input'
 import { Textarea } from '@/components/ui/Textarea'
 import { Button } from '@/components/ui/Button'
+import { FileUp } from 'lucide-react'
+import toast from 'react-hot-toast'
 
 interface ClientFormProps {
   client?: Client | null
@@ -35,18 +37,25 @@ export function ClientForm({
           address: client.address || '',
           city: client.city || '',
           country: client.country || '',
-          taxId: client.taxId || '',
+          nit: client.nit || '',
           notes: client.notes || '',
+          rutUrl: client.rutUrl || '',
         }
       : undefined,
   })
+
+  const handleRutUpload = () => {
+    toast('Funcionalidad de carga de RUT disponible proximamente', {
+      icon: '📄',
+    })
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Input
           label="Nombre *"
-          placeholder="Juan Pérez"
+          placeholder="Juan Perez"
           error={errors.name?.message}
           {...register('name')}
         />
@@ -59,6 +68,13 @@ export function ClientForm({
         />
 
         <Input
+          label="NIT / Documento"
+          placeholder="900.123.456-7"
+          error={errors.nit?.message}
+          {...register('nit')}
+        />
+
+        <Input
           label="Email *"
           type="email"
           placeholder="juan@example.com"
@@ -67,14 +83,14 @@ export function ClientForm({
         />
 
         <Input
-          label="Teléfono"
-          placeholder="+52 123 456 7890"
+          label="Telefono"
+          placeholder="+57 300 123 4567"
           error={errors.phone?.message}
           {...register('phone')}
         />
 
         <Input
-          label="Dirección"
+          label="Direccion"
           placeholder="Calle Principal #123"
           error={errors.address?.message}
           {...register('address')}
@@ -82,29 +98,40 @@ export function ClientForm({
 
         <Input
           label="Ciudad"
-          placeholder="Ciudad de México"
+          placeholder="Bogota"
           error={errors.city?.message}
           {...register('city')}
         />
 
         <Input
-          label="País"
-          placeholder="México"
+          label="Pais"
+          placeholder="Colombia"
           error={errors.country?.message}
           {...register('country')}
         />
 
-        <Input
-          label="RFC / Tax ID"
-          placeholder="XAXX010101000"
-          error={errors.taxId?.message}
-          {...register('taxId')}
-        />
+        <div className="flex flex-col justify-end">
+          <label className="block text-sm font-medium text-gray-200 mb-2">
+            RUT (PDF)
+          </label>
+          <Button
+            type="button"
+            variant="outline"
+            className="w-full justify-center"
+            onClick={handleRutUpload}
+          >
+            <FileUp className="w-4 h-4 mr-2" />
+            Adjuntar RUT
+          </Button>
+          {client?.rutUrl && (
+            <p className="text-xs text-green-400 mt-1">RUT adjunto</p>
+          )}
+        </div>
       </div>
 
       <Textarea
         label="Notas"
-        placeholder="Información adicional sobre el cliente..."
+        placeholder="Informacion adicional sobre el cliente..."
         rows={4}
         error={errors.notes?.message}
         {...register('notes')}

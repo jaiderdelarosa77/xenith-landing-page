@@ -97,6 +97,18 @@ export async function GET(request: NextRequest) {
         items: {
           orderBy: { order: 'asc' },
         },
+        groups: {
+          orderBy: { order: 'asc' },
+          include: {
+            group: {
+              select: {
+                id: true,
+                name: true,
+                description: true,
+              },
+            },
+          },
+        },
       },
       orderBy: { createdAt: 'desc' },
     })
@@ -127,7 +139,9 @@ export async function POST(request: NextRequest) {
 
     // Calculate totals
     let subtotal = new Decimal(0)
-    const items = validatedData.items.map((item, index) => {
+
+    // Process items
+    const items = (validatedData.items || []).map((item, index) => {
       const itemTotal = new Decimal(item.quantity).times(new Decimal(item.unitPrice))
       subtotal = subtotal.plus(itemTotal)
 
@@ -138,6 +152,22 @@ export async function POST(request: NextRequest) {
         unitPrice: new Decimal(item.unitPrice),
         total: itemTotal,
         order: index,
+      }
+    })
+
+    // Process groups
+    const groups = (validatedData.groups || []).map((group, index) => {
+      const groupTotal = new Decimal(group.quantity).times(new Decimal(group.unitPrice))
+      subtotal = subtotal.plus(groupTotal)
+
+      return {
+        groupId: group.groupId,
+        name: group.name,
+        description: group.description || null,
+        unitPrice: new Decimal(group.unitPrice),
+        quantity: group.quantity,
+        total: groupTotal,
+        order: items.length + index,
       }
     })
 
@@ -167,6 +197,9 @@ export async function POST(request: NextRequest) {
         items: {
           create: items,
         },
+        groups: {
+          create: groups,
+        },
       },
       include: {
         client: {
@@ -192,6 +225,18 @@ export async function POST(request: NextRequest) {
         },
         items: {
           orderBy: { order: 'asc' },
+        },
+        groups: {
+          orderBy: { order: 'asc' },
+          include: {
+            group: {
+              select: {
+                id: true,
+                name: true,
+                description: true,
+              },
+            },
+          },
         },
       },
     })

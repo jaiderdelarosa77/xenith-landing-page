@@ -86,6 +86,13 @@ const styles = StyleSheet.create({
     fontSize: 9,
     backgroundColor: '#faf5ff',
   },
+  tableRowGroup: {
+    flexDirection: 'row',
+    padding: 8,
+    borderBottom: '1 solid #e5e7eb',
+    fontSize: 9,
+    backgroundColor: '#ecfeff',
+  },
   tableCol1: { width: '8%' },
   tableCol2: { width: '42%' },
   tableCol3: { width: '15%', textAlign: 'right' },
@@ -107,6 +114,21 @@ const styles = StyleSheet.create({
     padding: '2 4',
     borderRadius: 2,
     marginTop: 2,
+  },
+  groupBadge: {
+    fontSize: 6,
+    color: '#0891b2',
+    backgroundColor: '#cffafe',
+    padding: '2 4',
+    borderRadius: 2,
+    marginTop: 2,
+  },
+  groupItemsList: {
+    fontSize: 7,
+    color: '#6b7280',
+    marginTop: 4,
+    paddingLeft: 8,
+    lineHeight: 1.4,
   },
   totals: {
     marginTop: 20,
@@ -186,6 +208,33 @@ export function QuotationPDFDocument({ quotation }: QuotationPDFProps) {
     return parts.length > 0 ? parts.join(' | ') : null
   }
 
+  const getGroupItemsList = (group: any) => {
+    if (!group.group?.items || group.group.items.length === 0) return null
+    return group.group.items
+      .map((item: any) => item.inventoryItem?.product?.name || 'Item')
+      .join(', ')
+  }
+
+  // Combine items and groups for display, sorted by order
+  const allLineItems: { type: 'item' | 'group'; data: any; order: number }[] = []
+
+  // Add items
+  if (quotation.items) {
+    quotation.items.forEach((item: any) => {
+      allLineItems.push({ type: 'item', data: item, order: item.order || 0 })
+    })
+  }
+
+  // Add groups
+  if (quotation.groups) {
+    quotation.groups.forEach((group: any) => {
+      allLineItems.push({ type: 'group', data: group, order: group.order || 0 })
+    })
+  }
+
+  // Sort by order
+  allLineItems.sort((a, b) => a.order - b.order)
+
   return (
     <Document>
       <Page size="A4" style={styles.page}>
@@ -243,25 +292,51 @@ export function QuotationPDFDocument({ quotation }: QuotationPDFProps) {
             <Text style={styles.tableCol4}>Precio Unit.</Text>
             <Text style={styles.tableCol5}>Total</Text>
           </View>
-          {quotation.items.map((item: any, index: number) => {
-            const inventoryDetails = getItemInventoryDetails(item)
-            return (
-              <View key={item.id} style={item.inventoryItem ? styles.tableRowInventory : styles.tableRow}>
-                <Text style={styles.tableCol1}>{index + 1}</Text>
-                <View style={styles.tableCol2}>
-                  <Text style={styles.itemDescription}>{item.description}</Text>
-                  {inventoryDetails && (
-                    <Text style={styles.itemDetails}>{inventoryDetails}</Text>
-                  )}
-                  {item.inventoryItem && (
-                    <Text style={styles.inventoryBadge}>INVENTARIO</Text>
-                  )}
+          {allLineItems.map((lineItem, index) => {
+            if (lineItem.type === 'item') {
+              const item = lineItem.data
+              const inventoryDetails = getItemInventoryDetails(item)
+              return (
+                <View key={`item-${item.id}`} style={item.inventoryItem ? styles.tableRowInventory : styles.tableRow}>
+                  <Text style={styles.tableCol1}>{index + 1}</Text>
+                  <View style={styles.tableCol2}>
+                    <Text style={styles.itemDescription}>{item.description}</Text>
+                    {inventoryDetails && (
+                      <Text style={styles.itemDetails}>{inventoryDetails}</Text>
+                    )}
+                    {item.inventoryItem && (
+                      <Text style={styles.inventoryBadge}>INVENTARIO</Text>
+                    )}
+                  </View>
+                  <Text style={styles.tableCol3}>{item.quantity}</Text>
+                  <Text style={styles.tableCol4}>{formatCurrency(Number(item.unitPrice))}</Text>
+                  <Text style={styles.tableCol5}>{formatCurrency(Number(item.total))}</Text>
                 </View>
-                <Text style={styles.tableCol3}>{item.quantity}</Text>
-                <Text style={styles.tableCol4}>{formatCurrency(Number(item.unitPrice))}</Text>
-                <Text style={styles.tableCol5}>{formatCurrency(Number(item.total))}</Text>
-              </View>
-            )
+              )
+            } else {
+              const group = lineItem.data
+              const groupItemsList = getGroupItemsList(group)
+              return (
+                <View key={`group-${group.id}`} style={styles.tableRowGroup}>
+                  <Text style={styles.tableCol1}>{index + 1}</Text>
+                  <View style={styles.tableCol2}>
+                    <Text style={styles.itemDescription}>{group.name}</Text>
+                    {group.description && (
+                      <Text style={styles.itemDetails}>{group.description}</Text>
+                    )}
+                    <Text style={styles.groupBadge}>PAQUETE</Text>
+                    {groupItemsList && (
+                      <Text style={styles.groupItemsList}>
+                        Incluye: {groupItemsList}
+                      </Text>
+                    )}
+                  </View>
+                  <Text style={styles.tableCol3}>{group.quantity}</Text>
+                  <Text style={styles.tableCol4}>{formatCurrency(Number(group.unitPrice))}</Text>
+                  <Text style={styles.tableCol5}>{formatCurrency(Number(group.total))}</Text>
+                </View>
+              )
+            }
           })}
         </View>
 
@@ -278,7 +353,7 @@ export function QuotationPDFDocument({ quotation }: QuotationPDFProps) {
             </View>
           )}
           <View style={styles.totalsRow}>
-            <Text>IVA (16%):</Text>
+            <Text>IVA (19%):</Text>
             <Text>{formatCurrency(Number(quotation.tax))}</Text>
           </View>
           <View style={styles.totalRow}>
