@@ -47,6 +47,7 @@ export type InventoryItem = {
     name: string
     brand: string | null
     model: string | null
+    imageUrl?: string | null
     unitPrice?: number | null
     rentalPrice?: number | null
     category?: {

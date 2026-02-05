@@ -64,6 +64,7 @@ export async function GET(request: NextRequest) {
             name: true,
             brand: true,
             model: true,
+            imageUrl: true,
             unitPrice: true,
             rentalPrice: true,
             category: {
@@ -162,6 +163,7 @@ export async function POST(request: NextRequest) {
             name: true,
             brand: true,
             model: true,
+            imageUrl: true,
             category: {
               select: {
                 id: true,

@@ -36,8 +36,17 @@ export function LoginForm() {
       })
 
       if (result?.error) {
-        setError('Credenciales inválidas')
-        toast.error('Error al iniciar sesión')
+        // Check for specific error types
+        if (result.error.includes('UserInactive')) {
+          setError('Tu cuenta ha sido desactivada. Contacta al administrador.')
+          toast.error('Cuenta desactivada')
+        } else if (result.error.includes('TooManyRequests')) {
+          setError('Demasiados intentos. Por favor espera unos minutos.')
+          toast.error('Demasiados intentos')
+        } else {
+          setError('Credenciales inválidas')
+          toast.error('Error al iniciar sesión')
+        }
         return
       }
 

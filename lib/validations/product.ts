@@ -10,7 +10,7 @@ export const productSchema = z.object({
   status: z.enum(['ACTIVE', 'INACTIVE']),
   unitPrice: z.number().min(0, 'El precio debe ser positivo').optional().nullable(),
   rentalPrice: z.number().min(0, 'El precio debe ser positivo').optional().nullable(),
-  imageUrl: z.string().url('URL inválida').optional().or(z.literal('')),
+  imageUrl: z.string().optional().nullable(),
   notes: z.string().optional(),
 })
 

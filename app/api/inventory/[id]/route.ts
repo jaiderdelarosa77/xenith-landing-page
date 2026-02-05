@@ -30,6 +30,7 @@ export async function GET(
             name: true,
             brand: true,
             model: true,
+            imageUrl: true,
             category: {
               select: {
                 id: true,
@@ -166,6 +167,7 @@ export async function PUT(
             name: true,
             brand: true,
             model: true,
+            imageUrl: true,
             category: {
               select: {
                 id: true,

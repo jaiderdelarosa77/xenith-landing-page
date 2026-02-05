@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Product } from '@/lib/validations/product'
 import { Table } from '@/components/ui/Table'
 import { Button } from '@/components/ui/Button'
+import { ProductThumbnail } from '@/components/ui/ProductThumbnail'
 import { Eye, Edit, Trash2, Package } from 'lucide-react'
 
 interface ProductsTableProps {
@@ -38,6 +39,7 @@ export function ProductsTable({ products, onDelete }: ProductsTableProps) {
       <Table>
         <thead>
           <tr>
+            <th className="w-16"></th>
             <th>SKU</th>
             <th>Nombre</th>
             <th>Categoría</th>
@@ -51,6 +53,13 @@ export function ProductsTable({ products, onDelete }: ProductsTableProps) {
         <tbody>
           {products.map((product) => (
             <tr key={product.id}>
+              <td>
+                <ProductThumbnail
+                  imageUrl={product.imageUrl}
+                  productName={product.name}
+                  size="sm"
+                />
+              </td>
               <td className="font-mono text-sm">{product.sku}</td>
               <td className="font-medium">{product.name}</td>
               <td>

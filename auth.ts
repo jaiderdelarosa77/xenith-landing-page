@@ -55,6 +55,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           return null
         }
 
+        // Check if user is active
+        if (!user.isActive) {
+          console.warn(`[SECURITY] Inactive user attempted login: ${email}`)
+          throw new Error("UserInactive")
+        }
+
         const isPasswordValid = await compare(
           credentials.password as string,
           user.password

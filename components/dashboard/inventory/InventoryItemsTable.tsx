@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { InventoryItem } from '@/lib/validations/inventory'
 import { Table } from '@/components/ui/Table'
 import { Button } from '@/components/ui/Button'
+import { ProductThumbnail } from '@/components/ui/ProductThumbnail'
 import { Eye, Edit, Trash2, ArrowDownToLine, ArrowUpFromLine, Tags } from 'lucide-react'
 
 interface InventoryItemsTableProps {
@@ -67,13 +68,20 @@ export function InventoryItemsTable({ items, onDelete, onCheckIn, onCheckOut }: 
                 </div>
               </td>
               <td>
-                <div>
-                  <span className="font-medium">{item.product?.name || 'N/A'}</span>
-                  {item.product?.brand && (
-                    <p className="text-xs text-gray-500">
-                      {[item.product.brand, item.product.model].filter(Boolean).join(' ')}
-                    </p>
-                  )}
+                <div className="flex items-center gap-3">
+                  <ProductThumbnail
+                    imageUrl={item.product?.imageUrl}
+                    productName={item.product?.name || 'Producto'}
+                    size="sm"
+                  />
+                  <div>
+                    <span className="font-medium">{item.product?.name || 'N/A'}</span>
+                    {item.product?.brand && (
+                      <p className="text-xs text-gray-500">
+                        {[item.product.brand, item.product.model].filter(Boolean).join(' ')}
+                      </p>
+                    )}
+                  </div>
                 </div>
               </td>
               <td>
