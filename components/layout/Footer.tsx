@@ -30,7 +30,7 @@ export function Footer() {
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
             <Link href="/inicio" className="inline-flex items-center space-x-2 group mb-4">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-violet-500 to-indigo-500 flex items-center justify-center shadow-lg">
+              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center shadow-lg">
                 <span className="text-white font-bold text-xl">X</span>
               </div>
               <span className="text-xl font-bold text-gradient">XENITH</span>
@@ -51,7 +51,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-gray-400 hover:text-violet-400 text-sm transition-colors"
+                    className="text-gray-400 hover:text-orange-400 text-sm transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -70,7 +70,7 @@ export function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-gray-400 hover:text-violet-400 text-sm transition-colors"
+                    className="text-gray-400 hover:text-orange-400 text-sm transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -92,7 +92,7 @@ export function Footer() {
               <a
                 key={social.label}
                 href={social.href}
-                className="text-gray-400 hover:text-violet-400 transition-colors"
+                className="text-gray-400 hover:text-orange-400 transition-colors"
                 aria-label={social.label}
                 target={social.href.startsWith('http') ? '_blank' : undefined}
                 rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}

@@ -33,7 +33,7 @@ export default function EditItemGroupPage() {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
-          <div className="inline-block w-8 h-8 border-4 border-violet-500 border-t-transparent rounded-full animate-spin" />
+          <div className="inline-block w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full animate-spin" />
           <p className="text-gray-400 mt-4">Cargando grupo...</p>
         </div>
       </div>
@@ -44,7 +44,7 @@ export default function EditItemGroupPage() {
     return (
       <div className="text-center py-12">
         <p className="text-gray-400">Grupo no encontrado</p>
-        <Link href="/dashboard/inventario/grupos" className="text-violet-400 hover:underline mt-2 inline-block">
+        <Link href="/dashboard/inventario/grupos" className="text-orange-400 hover:underline mt-2 inline-block">
           Volver a grupos
         </Link>
       </div>
@@ -63,8 +63,8 @@ export default function EditItemGroupPage() {
       </div>
 
       <div className="flex items-center gap-3">
-        <div className="p-2 rounded-lg bg-violet-500/10">
-          <Package2 className="w-6 h-6 text-violet-400" />
+        <div className="p-2 rounded-lg bg-orange-500/10">
+          <Package2 className="w-6 h-6 text-orange-400" />
         </div>
         <div>
           <h1 className="text-3xl font-bold">Editar Grupo</h1>

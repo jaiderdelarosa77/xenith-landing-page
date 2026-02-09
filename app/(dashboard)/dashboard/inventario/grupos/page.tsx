@@ -34,8 +34,8 @@ export default function ItemGroupsPage() {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-violet-500/10">
-              <Package2 className="w-6 h-6 text-violet-400" />
+            <div className="p-2 rounded-lg bg-orange-500/10">
+              <Package2 className="w-6 h-6 text-orange-400" />
             </div>
             <div>
               <h1 className="text-3xl font-bold">Grupos de Items</h1>
@@ -72,7 +72,7 @@ export default function ItemGroupsPage() {
         <Card.Content>
           {isLoading ? (
             <div className="text-center py-12">
-              <div className="inline-block w-8 h-8 border-4 border-violet-500 border-t-transparent rounded-full animate-spin" />
+              <div className="inline-block w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full animate-spin" />
               <p className="text-gray-400 mt-4">Cargando grupos...</p>
             </div>
           ) : (

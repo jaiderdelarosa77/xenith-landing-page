@@ -11,8 +11,8 @@ export function Hero() {
       {/* Animated Background */}
       <div className="absolute inset-0 -z-10">
         {/* Gradient Orbs */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-violet-500/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-amber-500/20 rounded-full blur-3xl animate-pulse delay-1000" />
 
         {/* Grid Pattern */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(139,92,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,0.03)_1px,transparent_1px)] bg-[size:64px_64px]" />
@@ -25,9 +25,9 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-violet-500/20 mb-8"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-orange-500/20 mb-8"
           >
-            <Sparkles className="w-4 h-4 text-violet-400" />
+            <Sparkles className="w-4 h-4 text-orange-400" />
             <span className="text-sm text-gray-300">
               Innovación en Ingeniería Robótica y Software
             </span>
@@ -102,9 +102,9 @@ export function Hero() {
             ].map((feature, index) => (
               <div
                 key={index}
-                className="glass p-6 rounded-xl hover:border-violet-500/40 transition-all duration-200"
+                className="glass p-6 rounded-xl hover:border-orange-500/40 transition-all duration-200"
               >
-                <feature.icon className="w-10 h-10 text-violet-400 mb-4 mx-auto" />
+                <feature.icon className="w-10 h-10 text-orange-400 mb-4 mx-auto" />
                 <h3 className="text-lg font-semibold text-gray-200 mb-2">
                   {feature.title}
                 </h3>

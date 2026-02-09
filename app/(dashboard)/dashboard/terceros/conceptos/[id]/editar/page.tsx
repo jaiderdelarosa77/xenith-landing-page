@@ -32,7 +32,7 @@ export default function EditConceptPage() {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
-          <div className="inline-block w-8 h-8 border-4 border-violet-500 border-t-transparent rounded-full animate-spin" />
+          <div className="inline-block w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full animate-spin" />
           <p className="text-gray-400 mt-4">Cargando concepto...</p>
         </div>
       </div>
@@ -43,7 +43,7 @@ export default function EditConceptPage() {
     return (
       <div className="text-center py-12">
         <p className="text-gray-400">Concepto no encontrado</p>
-        <Link href="/dashboard/terceros/conceptos" className="text-violet-400 hover:underline mt-2 inline-block">
+        <Link href="/dashboard/terceros/conceptos" className="text-orange-400 hover:underline mt-2 inline-block">
           Volver a conceptos
         </Link>
       </div>
@@ -62,8 +62,8 @@ export default function EditConceptPage() {
       </div>
 
       <div className="flex items-center gap-3">
-        <div className="p-2 rounded-lg bg-indigo-500/10">
-          <FileText className="w-6 h-6 text-indigo-400" />
+        <div className="p-2 rounded-lg bg-amber-500/10">
+          <FileText className="w-6 h-6 text-orange-400" />
         </div>
         <div>
           <h1 className="text-3xl font-bold">Editar Concepto</h1>

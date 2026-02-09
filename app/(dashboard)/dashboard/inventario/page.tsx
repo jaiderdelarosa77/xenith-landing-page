@@ -59,8 +59,8 @@ export default function InventarioDashboardPage() {
           title="Total Items"
           value={summary?.total || 0}
           icon={Package}
-          iconColor="text-violet-400"
-          iconBgColor="bg-violet-500/10"
+          iconColor="text-orange-400"
+          iconBgColor="bg-orange-500/10"
         />
 
         <StatsCard

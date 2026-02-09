@@ -102,7 +102,7 @@ export function LoginForm() {
       <div className="text-center">
         <p className="text-sm text-gray-400">
           ¿No tienes una cuenta?{' '}
-          <span className="text-violet-400">Contacta al administrador</span>
+          <span className="text-orange-400">Contacta al administrador</span>
         </p>
       </div>
     </form>

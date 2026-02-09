@@ -70,7 +70,7 @@ export function GroupItemsList({ items, onRemoveItem, isLoading }: GroupItemsLis
           {totalRentalPrice > 0 && (
             <div className="text-right">
               <p className="text-xs text-gray-400">Precio de Alquiler Total</p>
-              <p className="text-lg font-semibold text-violet-400">
+              <p className="text-lg font-semibold text-orange-400">
                 ${totalRentalPrice.toLocaleString('es-CO')}
               </p>
             </div>
@@ -122,7 +122,7 @@ export function GroupItemsList({ items, onRemoveItem, isLoading }: GroupItemsLis
                       {item?.product?.rentalPrice && (
                         <>
                           <span>•</span>
-                          <span className="text-violet-400">
+                          <span className="text-orange-400">
                             ${Number(item.product.rentalPrice).toLocaleString('es-CO')}/dia
                           </span>
                         </>

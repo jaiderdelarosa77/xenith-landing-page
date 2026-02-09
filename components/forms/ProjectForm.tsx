@@ -98,7 +98,7 @@ export function ProjectForm({
   if (loadingData) {
     return (
       <div className="flex items-center justify-center py-12">
-        <div className="inline-block w-8 h-8 border-4 border-violet-500 border-t-transparent rounded-full animate-spin" />
+        <div className="inline-block w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full animate-spin" />
       </div>
     )
   }
@@ -224,7 +224,7 @@ export function ProjectForm({
         <Card.Header>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <ListTodo className="w-5 h-5 text-violet-400" />
+              <ListTodo className="w-5 h-5 text-orange-400" />
               <h3 className="text-lg font-semibold">Tareas</h3>
               {fields.length > 0 && (
                 <span className="text-sm text-gray-400">({fields.length})</span>

@@ -69,7 +69,7 @@ export function DashboardHeader({ onMenuClick }: DashboardHeaderProps) {
             ) : (
               <Link
                 href={crumb.href}
-                className="text-gray-500 hover:text-violet-400 transition-colors"
+                className="text-gray-500 hover:text-orange-400 transition-colors"
               >
                 {crumb.label}
               </Link>

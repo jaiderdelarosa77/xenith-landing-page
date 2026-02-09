@@ -91,7 +91,7 @@ export function ImageMosaic({
               onMouseLeave={() => setHoveredIndex(null)}
             >
               {/* Gradient Border Effect */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-violet-500/20 via-transparent to-indigo-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-orange-500/20 via-transparent to-amber-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
               {/* Image Container */}
               <div className="absolute inset-[1px] rounded-2xl overflow-hidden bg-gray-900">
@@ -99,7 +99,7 @@ export function ImageMosaic({
                 {errorImages.has(index) ? (
                   <div className="absolute inset-0 bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800 flex flex-col items-center justify-center">
                     <div className="relative">
-                      <div className="absolute inset-0 bg-violet-500/20 blur-xl rounded-full" />
+                      <div className="absolute inset-0 bg-orange-500/20 blur-xl rounded-full" />
                       <ImageIcon className="w-10 h-10 md:w-16 md:h-16 text-gray-600 relative z-10" />
                     </div>
                     <span className="text-xs md:text-sm text-gray-500 mt-3 font-medium">
@@ -116,7 +116,7 @@ export function ImageMosaic({
                         loadedImages.has(index) ? 'opacity-0 pointer-events-none' : 'opacity-100'
                       )}
                     >
-                      <div className="w-8 h-8 border-2 border-violet-500/30 border-t-violet-500 rounded-full animate-spin" />
+                      <div className="w-8 h-8 border-2 border-orange-500/30 border-t-orange-500 rounded-full animate-spin" />
                     </div>
 
                     {/* Actual Image */}
@@ -144,7 +144,7 @@ export function ImageMosaic({
 
                 {/* Content Overlay */}
                 <div className="absolute inset-0 flex flex-col justify-end p-4 md:p-6 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                  <span className="text-xs md:text-sm text-violet-400 font-medium mb-1">
+                  <span className="text-xs md:text-sm text-orange-400 font-medium mb-1">
                     Proyecto {String(index + 1).padStart(2, '0')}
                   </span>
                   <h3 className="text-sm md:text-lg font-bold text-white line-clamp-2">
@@ -153,18 +153,18 @@ export function ImageMosaic({
                 </div>
 
                 {/* Corner Accent */}
-                <div className="absolute top-3 right-3 w-2 h-2 md:w-3 md:h-3 rounded-full bg-violet-500 opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:scale-100 scale-0" />
+                <div className="absolute top-3 right-3 w-2 h-2 md:w-3 md:h-3 rounded-full bg-orange-500 opacity-0 group-hover:opacity-100 transition-all duration-500 group-hover:scale-100 scale-0" />
               </div>
 
               {/* Glow Effect */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-violet-600 to-indigo-600 rounded-2xl blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 -z-10" />
+              <div className="absolute -inset-1 bg-gradient-to-r from-orange-600 to-amber-600 rounded-2xl blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 -z-10" />
             </div>
           ))}
         </div>
 
         {/* Bottom Accent Line */}
         <div className="mt-12 flex justify-center">
-          <div className="h-1 w-32 bg-gradient-to-r from-transparent via-violet-500 to-transparent rounded-full" />
+          <div className="h-1 w-32 bg-gradient-to-r from-transparent via-orange-500 to-transparent rounded-full" />
         </div>
       </div>
     </section>

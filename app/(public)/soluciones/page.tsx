@@ -95,10 +95,10 @@ export default function SolucionesPage() {
             ].map((phase, index) => (
               <div key={index} className="relative">
                 {index < 3 && (
-                  <div className="hidden md:block absolute top-12 left-1/2 w-full h-0.5 bg-gradient-to-r from-violet-500 to-transparent" />
+                  <div className="hidden md:block absolute top-12 left-1/2 w-full h-0.5 bg-gradient-to-r from-orange-500 to-transparent" />
                 )}
                 <div className="glass p-6 rounded-xl text-center relative z-10">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-violet-500 to-indigo-500 flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
                     {phase.step}
                   </div>
                   <h3 className="text-lg font-bold text-gray-200 mb-2">

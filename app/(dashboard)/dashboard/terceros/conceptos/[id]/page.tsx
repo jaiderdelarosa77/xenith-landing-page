@@ -48,7 +48,7 @@ export default function ConceptDetailPage() {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
-          <div className="inline-block w-8 h-8 border-4 border-violet-500 border-t-transparent rounded-full animate-spin" />
+          <div className="inline-block w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full animate-spin" />
           <p className="text-gray-400 mt-4">Cargando concepto...</p>
         </div>
       </div>
@@ -59,7 +59,7 @@ export default function ConceptDetailPage() {
     return (
       <div className="text-center py-12">
         <p className="text-gray-400">Concepto no encontrado</p>
-        <Link href="/dashboard/terceros/conceptos" className="text-violet-400 hover:underline mt-2 inline-block">
+        <Link href="/dashboard/terceros/conceptos" className="text-orange-400 hover:underline mt-2 inline-block">
           Volver a conceptos
         </Link>
       </div>
@@ -80,8 +80,8 @@ export default function ConceptDetailPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
         <div className="flex items-start gap-4">
-          <div className="p-3 rounded-xl bg-indigo-500/10">
-            <FileText className="w-8 h-8 text-indigo-400" />
+          <div className="p-3 rounded-xl bg-amber-500/10">
+            <FileText className="w-8 h-8 text-orange-400" />
           </div>
           <div>
             <div className="flex items-center gap-3">
@@ -105,7 +105,7 @@ export default function ConceptDetailPage() {
                 Creado {new Date(currentConcept.createdAt).toLocaleDateString('es-CO')}
               </span>
               {currentConcept.category && (
-                <span className="px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-400 font-medium">
+                <span className="px-2 py-0.5 rounded-full bg-amber-500/10 text-orange-400 font-medium">
                   {getCategoryLabel(currentConcept.category)}
                 </span>
               )}
@@ -155,7 +155,7 @@ export default function ConceptDetailPage() {
         <Card>
           <Card.Header>
             <Card.Title className="flex items-center gap-2">
-              <User className="w-5 h-5 text-violet-400" />
+              <User className="w-5 h-5 text-orange-400" />
               Contratista Asociado
             </Card.Title>
           </Card.Header>

@@ -120,7 +120,7 @@ function TaskProgressCell({ project }: { project: Project }) {
                 stroke="currentColor"
                 strokeWidth="2"
                 strokeDasharray={`${(percentage / 100) * 37.7} 37.7`}
-                className="text-violet-400"
+                className="text-orange-400"
               />
             </svg>
           </div>
@@ -155,7 +155,7 @@ function TaskProgressCell({ project }: { project: Project }) {
             <div className="w-full h-1.5 bg-gray-800 rounded-full overflow-hidden">
               <div
                 className={`h-full rounded-full transition-all ${
-                  allDone ? 'bg-green-400' : 'bg-violet-400'
+                  allDone ? 'bg-green-400' : 'bg-orange-400'
                 }`}
                 style={{ width: `${percentage}%` }}
               />
@@ -171,7 +171,7 @@ function TaskProgressCell({ project }: { project: Project }) {
                   {task.status === 'DONE' ? (
                     <CheckCircle2 className="w-3.5 h-3.5 text-green-400 mt-0.5 flex-shrink-0" />
                   ) : task.status === 'IN_PROGRESS' ? (
-                    <Timer className="w-3.5 h-3.5 text-violet-400 mt-0.5 flex-shrink-0" />
+                    <Timer className="w-3.5 h-3.5 text-orange-400 mt-0.5 flex-shrink-0" />
                   ) : (
                     <Circle className="w-3.5 h-3.5 text-gray-500 mt-0.5 flex-shrink-0" />
                   )}

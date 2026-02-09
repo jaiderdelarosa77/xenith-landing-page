@@ -33,7 +33,7 @@ export default function ItemGroupDetailPage() {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
-          <div className="inline-block w-8 h-8 border-4 border-violet-500 border-t-transparent rounded-full animate-spin" />
+          <div className="inline-block w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full animate-spin" />
           <p className="text-gray-400 mt-4">Cargando grupo...</p>
         </div>
       </div>
@@ -44,7 +44,7 @@ export default function ItemGroupDetailPage() {
     return (
       <div className="text-center py-12">
         <p className="text-gray-400">Grupo no encontrado</p>
-        <Link href="/dashboard/inventario/grupos" className="text-violet-400 hover:underline mt-2 inline-block">
+        <Link href="/dashboard/inventario/grupos" className="text-orange-400 hover:underline mt-2 inline-block">
           Volver a grupos
         </Link>
       </div>
@@ -68,8 +68,8 @@ export default function ItemGroupDetailPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
         <div className="flex items-start gap-4">
-          <div className="p-3 rounded-xl bg-violet-500/10">
-            <Package2 className="w-8 h-8 text-violet-400" />
+          <div className="p-3 rounded-xl bg-orange-500/10">
+            <Package2 className="w-8 h-8 text-orange-400" />
           </div>
           <div>
             <h1 className="text-3xl font-bold">{currentGroup.name}</h1>
@@ -81,7 +81,7 @@ export default function ItemGroupDetailPage() {
                 <Calendar className="w-4 h-4" />
                 Creado {new Date(currentGroup.createdAt).toLocaleDateString('es-CO')}
               </span>
-              <span className="px-2 py-0.5 rounded-full bg-violet-500/10 text-violet-400 font-medium">
+              <span className="px-2 py-0.5 rounded-full bg-orange-500/10 text-orange-400 font-medium">
                 {currentGroup._count?.items || 0} items
               </span>
             </div>

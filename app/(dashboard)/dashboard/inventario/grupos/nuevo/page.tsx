@@ -32,8 +32,8 @@ export default function NewItemGroupPage() {
       </div>
 
       <div className="flex items-center gap-3">
-        <div className="p-2 rounded-lg bg-violet-500/10">
-          <Package2 className="w-6 h-6 text-violet-400" />
+        <div className="p-2 rounded-lg bg-orange-500/10">
+          <Package2 className="w-6 h-6 text-orange-400" />
         </div>
         <div>
           <h1 className="text-3xl font-bold">Nuevo Grupo de Items</h1>

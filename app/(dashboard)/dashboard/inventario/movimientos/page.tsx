@@ -29,7 +29,7 @@ export default function MovementsPage() {
         <Card.Header>
           <div className="flex gap-4">
             <select
-              className="px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 text-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
+              className="px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 text-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
               value={typeFilter}
               onChange={(e) => setTypeFilter(e.target.value)}
             >
@@ -45,7 +45,7 @@ export default function MovementsPage() {
         <Card.Content>
           {isLoading ? (
             <div className="text-center py-12">
-              <div className="inline-block w-8 h-8 border-4 border-violet-500 border-t-transparent rounded-full animate-spin" />
+              <div className="inline-block w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full animate-spin" />
               <p className="text-gray-400 mt-4">Cargando movimientos...</p>
             </div>
           ) : (

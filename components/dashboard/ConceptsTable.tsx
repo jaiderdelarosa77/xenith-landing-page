@@ -66,7 +66,7 @@ export function ConceptsTable({ concepts, onDelete }: ConceptsTableProps) {
               </td>
               <td>
                 {concept.category ? (
-                  <span className="px-2 py-1 rounded-full text-xs font-medium bg-indigo-500/10 text-indigo-400">
+                  <span className="px-2 py-1 rounded-full text-xs font-medium bg-amber-500/10 text-orange-400">
                     {getCategoryLabel(concept.category)}
                   </span>
                 ) : (

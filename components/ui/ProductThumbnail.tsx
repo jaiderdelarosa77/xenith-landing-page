@@ -56,7 +56,7 @@ export function ProductThumbnail({
           'flex-shrink-0 rounded-lg overflow-hidden bg-gray-800 border border-gray-700',
           'flex items-center justify-center',
           sizeClasses[size],
-          hasValidImage && showPreviewOnClick && 'cursor-zoom-in hover:border-violet-500 transition-colors',
+          hasValidImage && showPreviewOnClick && 'cursor-zoom-in hover:border-orange-500 transition-colors',
           className
         )}
         title={hasValidImage && showPreviewOnClick ? 'Click para ampliar' : productName}

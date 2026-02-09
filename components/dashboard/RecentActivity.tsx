@@ -54,7 +54,7 @@ const activityIcons = {
 }
 
 const activityColors = {
-  project: 'text-violet-400 bg-violet-500/10',
+  project: 'text-orange-400 bg-orange-500/10',
   client: 'text-blue-400 bg-blue-500/10',
   quotation: 'text-amber-400 bg-amber-500/10',
   payment: 'text-green-400 bg-green-500/10',

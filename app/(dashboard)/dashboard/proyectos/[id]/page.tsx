@@ -50,7 +50,7 @@ export default function ProjectDetailPage({
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-96">
-        <div className="inline-block w-8 h-8 border-4 border-violet-500 border-t-transparent rounded-full animate-spin" />
+        <div className="inline-block w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full animate-spin" />
       </div>
     )
   }
@@ -114,7 +114,7 @@ export default function ProjectDetailPage({
             <Card.Content>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex items-start gap-3">
-                  <Building2 className="w-5 h-5 text-violet-400 mt-0.5" />
+                  <Building2 className="w-5 h-5 text-orange-400 mt-0.5" />
                   <div>
                     <p className="text-sm text-gray-400">Cliente</p>
                     <p className="font-medium">{projectData.client?.name}</p>
@@ -125,7 +125,7 @@ export default function ProjectDetailPage({
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <User className="w-5 h-5 text-violet-400 mt-0.5" />
+                  <User className="w-5 h-5 text-orange-400 mt-0.5" />
                   <div>
                     <p className="text-sm text-gray-400">Asignado a</p>
                     <p className="font-medium">
@@ -136,7 +136,7 @@ export default function ProjectDetailPage({
 
                 {projectData.startDate && (
                   <div className="flex items-start gap-3">
-                    <Calendar className="w-5 h-5 text-violet-400 mt-0.5" />
+                    <Calendar className="w-5 h-5 text-orange-400 mt-0.5" />
                     <div>
                       <p className="text-sm text-gray-400">Fecha de Inicio</p>
                       <p className="font-medium">
@@ -150,7 +150,7 @@ export default function ProjectDetailPage({
 
                 {projectData.endDate && (
                   <div className="flex items-start gap-3">
-                    <Calendar className="w-5 h-5 text-violet-400 mt-0.5" />
+                    <Calendar className="w-5 h-5 text-orange-400 mt-0.5" />
                     <div>
                       <p className="text-sm text-gray-400">Fecha de Fin</p>
                       <p className="font-medium">
@@ -164,7 +164,7 @@ export default function ProjectDetailPage({
 
                 {projectData.budget && (
                   <div className="flex items-start gap-3">
-                    <DollarSign className="w-5 h-5 text-violet-400 mt-0.5" />
+                    <DollarSign className="w-5 h-5 text-orange-400 mt-0.5" />
                     <div>
                       <p className="text-sm text-gray-400">Presupuesto</p>
                       <p className="font-medium">
@@ -192,7 +192,7 @@ export default function ProjectDetailPage({
             <Card>
               <Card.Header>
                 <div className="flex items-center gap-2">
-                  <ListTodo className="w-5 h-5 text-violet-400" />
+                  <ListTodo className="w-5 h-5 text-orange-400" />
                   <h2 className="text-xl font-semibold">Tareas ({projectData.tasks.length})</h2>
                 </div>
               </Card.Header>

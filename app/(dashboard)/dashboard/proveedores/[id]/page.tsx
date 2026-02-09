@@ -54,7 +54,7 @@ export default function SupplierDetailPage() {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
-          <div className="inline-block w-8 h-8 border-4 border-violet-500 border-t-transparent rounded-full animate-spin" />
+          <div className="inline-block w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full animate-spin" />
           <p className="text-gray-400 mt-4">Cargando proveedor...</p>
         </div>
       </div>
@@ -113,7 +113,7 @@ export default function SupplierDetailPage() {
           <Card>
             <Card.Header>
               <div className="flex items-center gap-2">
-                <User className="w-5 h-5 text-violet-400" />
+                <User className="w-5 h-5 text-orange-400" />
                 <h2 className="text-lg font-semibold">Información de Contacto</h2>
               </div>
             </Card.Header>
@@ -129,7 +129,7 @@ export default function SupplierDetailPage() {
                     {supplier.email ? (
                       <a
                         href={`mailto:${supplier.email}`}
-                        className="text-violet-400 hover:text-violet-300 flex items-center gap-2"
+                        className="text-orange-400 hover:text-orange-300 flex items-center gap-2"
                       >
                         <Mail className="w-4 h-4" />
                         {supplier.email}
@@ -163,7 +163,7 @@ export default function SupplierDetailPage() {
                         href={supplier.website}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-violet-400 hover:text-violet-300 flex items-center gap-2"
+                        className="text-orange-400 hover:text-orange-300 flex items-center gap-2"
                       >
                         <Globe className="w-4 h-4" />
                         {supplier.website}
@@ -181,7 +181,7 @@ export default function SupplierDetailPage() {
           <Card>
             <Card.Header>
               <div className="flex items-center gap-2">
-                <MapPin className="w-5 h-5 text-violet-400" />
+                <MapPin className="w-5 h-5 text-orange-400" />
                 <h2 className="text-lg font-semibold">Dirección</h2>
               </div>
             </Card.Header>
@@ -208,9 +208,9 @@ export default function SupplierDetailPage() {
             <Card.Header>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <Package className="w-5 h-5 text-violet-400" />
+                  <Package className="w-5 h-5 text-orange-400" />
                   <h2 className="text-lg font-semibold">Productos Suministrados</h2>
-                  <span className="ml-2 px-2 py-0.5 rounded-full text-xs font-medium bg-violet-500/10 text-violet-400">
+                  <span className="ml-2 px-2 py-0.5 rounded-full text-xs font-medium bg-orange-500/10 text-orange-400">
                     {supplier._count?.products || 0}
                   </span>
                 </div>
@@ -236,7 +236,7 @@ export default function SupplierDetailPage() {
                           <td>
                             <Link
                               href={`/dashboard/inventario/productos/${ps.product.id}`}
-                              className="text-violet-400 hover:text-violet-300"
+                              className="text-orange-400 hover:text-orange-300"
                             >
                               {ps.product.name}
                             </Link>
@@ -277,7 +277,7 @@ export default function SupplierDetailPage() {
             <Card>
               <Card.Header>
                 <div className="flex items-center gap-2">
-                  <FileText className="w-5 h-5 text-violet-400" />
+                  <FileText className="w-5 h-5 text-orange-400" />
                   <h2 className="text-lg font-semibold">Notas</h2>
                 </div>
               </Card.Header>
@@ -291,7 +291,7 @@ export default function SupplierDetailPage() {
           <Card>
             <Card.Header>
               <div className="flex items-center gap-2">
-                <Calendar className="w-5 h-5 text-violet-400" />
+                <Calendar className="w-5 h-5 text-orange-400" />
                 <h2 className="text-lg font-semibold">Detalles</h2>
               </div>
             </Card.Header>

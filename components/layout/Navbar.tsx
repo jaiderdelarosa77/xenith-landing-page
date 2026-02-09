@@ -25,7 +25,7 @@ export function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/inicio" className="flex items-center space-x-2 group">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-violet-500 to-indigo-500 flex items-center justify-center shadow-lg group-hover:shadow-violet-500/50 transition-shadow duration-200">
+            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center shadow-lg group-hover:shadow-orange-500/50 transition-shadow duration-200">
               <span className="text-white font-bold text-xl">X</span>
             </div>
             <span className="text-xl font-bold text-gradient">XENITH</span>
@@ -40,7 +40,7 @@ export function Navbar() {
                 className={cn(
                   'px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200',
                   isActive(link.href)
-                    ? 'bg-violet-500/10 text-violet-400 border border-violet-500/20'
+                    ? 'bg-orange-500/10 text-orange-400 border border-orange-500/20'
                     : 'text-gray-300 hover:text-white hover:bg-gray-800'
                 )}
               >
@@ -85,7 +85,7 @@ export function Navbar() {
                 className={cn(
                   'block px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200',
                   isActive(link.href)
-                    ? 'bg-violet-500/10 text-violet-400 border border-violet-500/20'
+                    ? 'bg-orange-500/10 text-orange-400 border border-orange-500/20'
                     : 'text-gray-300 hover:text-white hover:bg-gray-800'
                 )}
               >

@@ -118,7 +118,7 @@ export function ItemSelector({ onAddItem, excludeItemIds = [], isLoading }: Item
                 className={cn(
                   'px-3 py-1.5 rounded-full text-xs font-medium transition-colors',
                   !selectedCategory
-                    ? 'bg-violet-500 text-white'
+                    ? 'bg-orange-500 text-white'
                     : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
                 )}
               >
@@ -131,7 +131,7 @@ export function ItemSelector({ onAddItem, excludeItemIds = [], isLoading }: Item
                   className={cn(
                     'px-3 py-1.5 rounded-full text-xs font-medium transition-colors',
                     selectedCategory === cat.id
-                      ? 'bg-violet-500 text-white'
+                      ? 'bg-orange-500 text-white'
                       : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
                   )}
                   style={selectedCategory === cat.id && cat.color ? {
@@ -149,7 +149,7 @@ export function ItemSelector({ onAddItem, excludeItemIds = [], isLoading }: Item
       <Card.Content>
         {loadingItems ? (
           <div className="text-center py-8">
-            <div className="inline-block w-6 h-6 border-2 border-violet-500 border-t-transparent rounded-full animate-spin" />
+            <div className="inline-block w-6 h-6 border-2 border-orange-500 border-t-transparent rounded-full animate-spin" />
             <p className="text-gray-400 mt-2 text-sm">Cargando items...</p>
           </div>
         ) : filteredItems.length === 0 ? (
@@ -210,7 +210,7 @@ export function ItemSelector({ onAddItem, excludeItemIds = [], isLoading }: Item
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="ml-2 text-violet-400 hover:text-violet-300 hover:bg-violet-500/10"
+                  className="ml-2 text-orange-400 hover:text-orange-300 hover:bg-orange-500/10"
                   onClick={() => onAddItem(item.id)}
                   disabled={isLoading}
                 >

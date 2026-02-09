@@ -104,7 +104,7 @@ export default function RfidTagDetailPage() {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
-          <div className="inline-block w-8 h-8 border-4 border-violet-500 border-t-transparent rounded-full animate-spin" />
+          <div className="inline-block w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full animate-spin" />
           <p className="text-gray-400 mt-4">Cargando tag...</p>
         </div>
       </div>
@@ -139,7 +139,7 @@ export default function RfidTagDetailPage() {
             </Link>
             <div>
               <h1 className="text-3xl font-bold flex items-center gap-3">
-                <Radio className="w-8 h-8 text-violet-400" />
+                <Radio className="w-8 h-8 text-orange-400" />
                 Tag RFID
                 <span className={`px-3 py-1 rounded-full text-sm font-medium ${statusConfig[tag.status].className}`}>
                   {statusConfig[tag.status].label}
@@ -170,7 +170,7 @@ export default function RfidTagDetailPage() {
             <Card>
               <Card.Header>
                 <div className="flex items-center gap-2">
-                  <Radio className="w-5 h-5 text-violet-400" />
+                  <Radio className="w-5 h-5 text-orange-400" />
                   <h2 className="text-lg font-semibold">Información del Tag</h2>
                 </div>
               </Card.Header>
@@ -207,7 +207,7 @@ export default function RfidTagDetailPage() {
               <Card>
                 <Card.Header>
                   <div className="flex items-center gap-2">
-                    <Package className="w-5 h-5 text-violet-400" />
+                    <Package className="w-5 h-5 text-orange-400" />
                     <h2 className="text-lg font-semibold">Item Vinculado</h2>
                   </div>
                 </Card.Header>
@@ -252,7 +252,7 @@ export default function RfidTagDetailPage() {
             <Card>
               <Card.Header>
                 <div className="flex items-center gap-2">
-                  <Activity className="w-5 h-5 text-violet-400" />
+                  <Activity className="w-5 h-5 text-orange-400" />
                   <h2 className="text-lg font-semibold">Historial de Detecciones</h2>
                   <span className="ml-2 px-2 py-0.5 rounded-full text-xs font-medium bg-gray-500/10 text-gray-400">
                     Últimas 50
@@ -326,7 +326,7 @@ export default function RfidTagDetailPage() {
             <Card>
               <Card.Header>
                 <div className="flex items-center gap-2">
-                  <Clock className="w-5 h-5 text-violet-400" />
+                  <Clock className="w-5 h-5 text-orange-400" />
                   <h2 className="text-lg font-semibold">Detalles</h2>
                 </div>
               </Card.Header>

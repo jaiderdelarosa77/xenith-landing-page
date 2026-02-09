@@ -211,7 +211,7 @@ export function Sidebar({ isOpen = true, onClose }: SidebarProps) {
           {/* Logo */}
           <div className="flex h-16 items-center justify-between px-6 border-b border-gray-800">
             <Link href="/dashboard" className="flex items-center space-x-2">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-500 to-indigo-500 flex items-center justify-center shadow-lg">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center shadow-lg">
                 <span className="text-white font-bold text-lg">X</span>
               </div>
               <span className="text-lg font-bold text-gradient">XENITH</span>
@@ -233,7 +233,7 @@ export function Sidebar({ isOpen = true, onClose }: SidebarProps) {
             {/* Loading state */}
             {isLoading ? (
               <div className="flex items-center justify-center py-8">
-                <div className="w-6 h-6 border-2 border-violet-500 border-t-transparent rounded-full animate-spin" />
+                <div className="w-6 h-6 border-2 border-orange-500 border-t-transparent rounded-full animate-spin" />
               </div>
             ) : (
               <>
@@ -241,8 +241,8 @@ export function Sidebar({ isOpen = true, onClose }: SidebarProps) {
                 {filteredNavigation.length > 0 &&
                   renderNavList(
                     filteredNavigation,
-                    'bg-violet-500/10 text-violet-400',
-                    'border border-violet-500/20'
+                    'bg-orange-500/10 text-orange-400',
+                    'border border-orange-500/20'
                   )}
 
                 {/* Inventory Section */}
@@ -273,8 +273,8 @@ export function Sidebar({ isOpen = true, onClose }: SidebarProps) {
                     </div>
                     {renderNavList(
                       filteredTerceros,
-                      'bg-orange-500/10 text-orange-400',
-                      'border border-orange-500/20'
+                      'bg-cyan-500/10 text-cyan-400',
+                      'border border-cyan-500/20'
                     )}
                   </>
                 )}
@@ -335,7 +335,7 @@ export function Sidebar({ isOpen = true, onClose }: SidebarProps) {
                 'w-10 h-10 rounded-full flex items-center justify-center',
                 isSuperAdmin
                   ? 'bg-gradient-to-br from-red-500 to-orange-500'
-                  : 'bg-gradient-to-br from-violet-500 to-indigo-500'
+                  : 'bg-gradient-to-br from-orange-500 to-amber-500'
               )}>
                 <span className="text-white font-medium text-sm">
                   {user?.name?.charAt(0).toUpperCase() || user?.email?.charAt(0).toUpperCase() || 'U'}
@@ -361,7 +361,7 @@ export function Sidebar({ isOpen = true, onClose }: SidebarProps) {
                 className={cn(
                   'flex items-center gap-2 w-full px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200',
                   pathname === '/dashboard/perfil'
-                    ? 'bg-violet-500/10 text-violet-400 border border-violet-500/20'
+                    ? 'bg-orange-500/10 text-orange-400 border border-orange-500/20'
                     : 'text-gray-400 hover:text-white hover:bg-gray-800'
                 )}
               >

@@ -58,7 +58,7 @@ export function RfidTagsTable({ tags, onDelete }: RfidTagsTableProps) {
                 {tag.inventoryItem ? (
                   <Link
                     href={`/dashboard/inventario/items/${tag.inventoryItem.id}`}
-                    className="text-violet-400 hover:text-violet-300 flex items-center gap-1"
+                    className="text-orange-400 hover:text-orange-300 flex items-center gap-1"
                   >
                     <LinkIcon className="w-3 h-3" />
                     {tag.inventoryItem.assetTag || tag.inventoryItem.serialNumber || tag.inventoryItem.product?.name}

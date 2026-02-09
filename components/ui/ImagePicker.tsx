@@ -122,7 +122,7 @@ export function ImagePicker({
           'relative border-2 border-dashed rounded-lg transition-all duration-200 cursor-pointer',
           'flex items-center justify-center',
           isDragging
-            ? 'border-violet-500 bg-violet-500/10'
+            ? 'border-orange-500 bg-orange-500/10'
             : 'border-gray-700 hover:border-gray-600 bg-gray-900/50',
           disabled && 'opacity-50 cursor-not-allowed',
           error && 'border-red-500',

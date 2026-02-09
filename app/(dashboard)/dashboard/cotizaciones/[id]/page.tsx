@@ -66,7 +66,7 @@ export default function QuotationDetailPage({
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-96">
-        <div className="inline-block w-8 h-8 border-4 border-violet-500 border-t-transparent rounded-full animate-spin" />
+        <div className="inline-block w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full animate-spin" />
       </div>
     )
   }
@@ -101,7 +101,7 @@ export default function QuotationDetailPage({
                 {statusLabels[quotationData.status]}
               </span>
             </div>
-            <p className="text-violet-400 font-mono mt-1">
+            <p className="text-orange-400 font-mono mt-1">
               {quotationData.quotationNumber}
             </p>
           </div>
@@ -240,7 +240,7 @@ export default function QuotationDetailPage({
               {quotationData.client ? (
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
-                    <User className="w-5 h-5 text-violet-400 mt-0.5" />
+                    <User className="w-5 h-5 text-orange-400 mt-0.5" />
                     <div>
                       <p className="font-medium">{quotationData.client.name}</p>
                       {quotationData.client.company && (
@@ -251,7 +251,7 @@ export default function QuotationDetailPage({
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <Mail className="w-5 h-5 text-violet-400 mt-0.5" />
+                    <Mail className="w-5 h-5 text-orange-400 mt-0.5" />
                     <div>
                       <p className="text-sm text-gray-400">Email</p>
                       <p className="font-medium">{quotationData.client.email}</p>
@@ -277,7 +277,7 @@ export default function QuotationDetailPage({
               </Card.Header>
               <Card.Content>
                 <div className="flex items-start gap-3">
-                  <FileText className="w-5 h-5 text-violet-400 mt-0.5" />
+                  <FileText className="w-5 h-5 text-orange-400 mt-0.5" />
                   <div>
                     <p className="font-medium">{quotationData.project.title}</p>
                   </div>
@@ -299,7 +299,7 @@ export default function QuotationDetailPage({
             <Card.Content>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
-                  <Calendar className="w-5 h-5 text-violet-400 mt-0.5" />
+                  <Calendar className="w-5 h-5 text-orange-400 mt-0.5" />
                   <div>
                     <p className="text-sm text-gray-400">Fecha de Creacion</p>
                     <p className="font-medium">
@@ -310,7 +310,7 @@ export default function QuotationDetailPage({
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <Calendar className="w-5 h-5 text-violet-400 mt-0.5" />
+                  <Calendar className="w-5 h-5 text-orange-400 mt-0.5" />
                   <div>
                     <p className="text-sm text-gray-400">Valida hasta</p>
                     <p className="font-medium">
@@ -343,8 +343,8 @@ export default function QuotationDetailPage({
               </Card.Header>
               <Card.Content>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-violet-500/20 flex items-center justify-center">
-                    <User className="w-5 h-5 text-violet-400" />
+                  <div className="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center">
+                    <User className="w-5 h-5 text-orange-400" />
                   </div>
                   <div>
                     <p className="font-medium">

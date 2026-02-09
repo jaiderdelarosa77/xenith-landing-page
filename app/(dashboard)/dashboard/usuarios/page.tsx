@@ -289,7 +289,7 @@ export default function UsersPage() {
   if (status === 'loading' || isLoading) {
     return (
       <div className="flex items-center justify-center h-96">
-        <div className="inline-block w-8 h-8 border-4 border-violet-500 border-t-transparent rounded-full animate-spin" />
+        <div className="inline-block w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full animate-spin" />
       </div>
     )
   }
@@ -459,7 +459,7 @@ export default function UsersPage() {
               {/* Informacion basica */}
               <div>
                 <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                  <Shield className="w-5 h-5 text-violet-400" />
+                  <Shield className="w-5 h-5 text-orange-400" />
                   Informacion del Usuario
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -520,7 +520,7 @@ export default function UsersPage() {
               {/* Permisos */}
               <div>
                 <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                  <Eye className="w-5 h-5 text-violet-400" />
+                  <Eye className="w-5 h-5 text-orange-400" />
                   Permisos por Modulo
                 </h3>
                 <p className="text-sm text-gray-400 mb-4">
@@ -538,7 +538,7 @@ export default function UsersPage() {
                           <button
                             type="button"
                             onClick={() => handleSelectAllGroup(groupKey, 'canView', true)}
-                            className="text-xs text-violet-400 hover:text-violet-300"
+                            className="text-xs text-orange-400 hover:text-orange-300"
                           >
                             Ver todos
                           </button>
@@ -581,7 +581,7 @@ export default function UsersPage() {
                                       e.target.checked
                                     )
                                   }
-                                  className="w-4 h-4 rounded border-gray-600 bg-gray-800 text-violet-500 focus:ring-violet-500 focus:ring-offset-gray-900"
+                                  className="w-4 h-4 rounded border-gray-600 bg-gray-800 text-orange-500 focus:ring-orange-500 focus:ring-offset-gray-900"
                                 />
                                 <span className="text-sm text-gray-400 flex items-center gap-1">
                                   <Eye className="w-3 h-3" />

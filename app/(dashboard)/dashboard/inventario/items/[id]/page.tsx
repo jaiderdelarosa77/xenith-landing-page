@@ -32,7 +32,7 @@ const statusConfig = {
 }
 
 const typeConfig = {
-  UNIT: { label: 'Unidad', className: 'bg-violet-500/10 text-violet-400' },
+  UNIT: { label: 'Unidad', className: 'bg-orange-500/10 text-orange-400' },
   CONTAINER: { label: 'Contenedor', className: 'bg-cyan-500/10 text-cyan-400' },
   BULK: { label: 'Bulk', className: 'bg-gray-500/10 text-gray-400' },
 }
@@ -41,7 +41,7 @@ const movementTypeConfig: Record<string, { label: string; className: string }> =
   CHECK_IN: { label: 'Entrada', className: 'text-green-400' },
   CHECK_OUT: { label: 'Salida', className: 'text-blue-400' },
   ADJUSTMENT: { label: 'Ajuste', className: 'text-amber-400' },
-  ENROLLMENT: { label: 'Registro', className: 'text-violet-400' },
+  ENROLLMENT: { label: 'Registro', className: 'text-orange-400' },
   TRANSFER: { label: 'Transferencia', className: 'text-cyan-400' },
 }
 
@@ -133,7 +133,7 @@ export default function InventoryItemDetailPage() {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
-          <div className="inline-block w-8 h-8 border-4 border-violet-500 border-t-transparent rounded-full animate-spin" />
+          <div className="inline-block w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full animate-spin" />
           <p className="text-gray-400 mt-4">Cargando item...</p>
         </div>
       </div>
@@ -209,7 +209,7 @@ export default function InventoryItemDetailPage() {
           <Card>
             <Card.Header>
               <div className="flex items-center gap-2">
-                <Package className="w-5 h-5 text-violet-400" />
+                <Package className="w-5 h-5 text-orange-400" />
                 <h2 className="text-lg font-semibold">Información General</h2>
               </div>
             </Card.Header>
@@ -219,7 +219,7 @@ export default function InventoryItemDetailPage() {
                   <label className="text-sm text-gray-400">Producto</label>
                   <Link
                     href={`/dashboard/inventario/productos/${item.productId}`}
-                    className="mt-1 flex items-center gap-2 text-violet-400 hover:text-violet-300"
+                    className="mt-1 flex items-center gap-2 text-orange-400 hover:text-orange-300"
                   >
                     {item.product?.name}
                     {item.product?.brand && (
@@ -275,7 +275,7 @@ export default function InventoryItemDetailPage() {
                     <label className="text-sm text-gray-400">Contenedor</label>
                     <Link
                       href={`/dashboard/inventario/items/${item.containerId}`}
-                      className="mt-1 flex items-center gap-2 text-violet-400 hover:text-violet-300"
+                      className="mt-1 flex items-center gap-2 text-orange-400 hover:text-orange-300"
                     >
                       <Box className="w-4 h-4" />
                       {item.container.assetTag || item.container.serialNumber || item.container.id.slice(-8)}
@@ -299,9 +299,9 @@ export default function InventoryItemDetailPage() {
               <Card.Header>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <Box className="w-5 h-5 text-violet-400" />
+                    <Box className="w-5 h-5 text-orange-400" />
                     <h2 className="text-lg font-semibold">Contenido</h2>
-                    <span className="ml-2 px-2 py-0.5 rounded-full text-xs font-medium bg-violet-500/10 text-violet-400">
+                    <span className="ml-2 px-2 py-0.5 rounded-full text-xs font-medium bg-orange-500/10 text-orange-400">
                       {item._count?.contents || 0} items
                     </span>
                   </div>
@@ -324,7 +324,7 @@ export default function InventoryItemDetailPage() {
                             <td>
                               <Link
                                 href={`/dashboard/inventario/items/${content.id}`}
-                                className="font-mono text-sm text-violet-400 hover:text-violet-300"
+                                className="font-mono text-sm text-orange-400 hover:text-orange-300"
                               >
                                 {content.assetTag || content.serialNumber || content.id.slice(-8)}
                               </Link>
@@ -354,7 +354,7 @@ export default function InventoryItemDetailPage() {
           <Card>
             <Card.Header>
               <div className="flex items-center gap-2">
-                <History className="w-5 h-5 text-violet-400" />
+                <History className="w-5 h-5 text-orange-400" />
                 <h2 className="text-lg font-semibold">Historial de Movimientos</h2>
                 <span className="ml-2 px-2 py-0.5 rounded-full text-xs font-medium bg-gray-500/10 text-gray-400">
                   {item._count?.movements || 0}
@@ -431,7 +431,7 @@ export default function InventoryItemDetailPage() {
           <Card>
             <Card.Header>
               <div className="flex items-center gap-2">
-                <Radio className="w-5 h-5 text-violet-400" />
+                <Radio className="w-5 h-5 text-orange-400" />
                 <h2 className="text-lg font-semibold">Tag RFID</h2>
               </div>
             </Card.Header>
@@ -475,7 +475,7 @@ export default function InventoryItemDetailPage() {
           <Card>
             <Card.Header>
               <div className="flex items-center gap-2">
-                <DollarSign className="w-5 h-5 text-violet-400" />
+                <DollarSign className="w-5 h-5 text-orange-400" />
                 <h2 className="text-lg font-semibold">Información de Compra</h2>
               </div>
             </Card.Header>
@@ -503,7 +503,7 @@ export default function InventoryItemDetailPage() {
           <Card>
             <Card.Header>
               <div className="flex items-center gap-2">
-                <Calendar className="w-5 h-5 text-violet-400" />
+                <Calendar className="w-5 h-5 text-orange-400" />
                 <h2 className="text-lg font-semibold">Detalles</h2>
               </div>
             </Card.Header>

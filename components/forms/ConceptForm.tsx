@@ -130,7 +130,7 @@ export function ConceptForm({ initialData, onSubmit, isLoading }: ConceptFormPro
           <div className="grid grid-cols-1 gap-6">
             {loadingSuppliers ? (
               <div className="text-center py-4">
-                <div className="inline-block w-6 h-6 border-2 border-violet-500 border-t-transparent rounded-full animate-spin" />
+                <div className="inline-block w-6 h-6 border-2 border-orange-500 border-t-transparent rounded-full animate-spin" />
                 <p className="text-gray-400 mt-2 text-sm">Cargando contratistas...</p>
               </div>
             ) : (
@@ -154,7 +154,7 @@ export function ConceptForm({ initialData, onSubmit, isLoading }: ConceptFormPro
               <input
                 type="checkbox"
                 id="isActive"
-                className="w-4 h-4 rounded border-gray-700 bg-gray-800 text-violet-500 focus:ring-violet-500"
+                className="w-4 h-4 rounded border-gray-700 bg-gray-800 text-orange-500 focus:ring-orange-500"
                 {...register('isActive')}
               />
               <label htmlFor="isActive" className="text-sm text-gray-300">

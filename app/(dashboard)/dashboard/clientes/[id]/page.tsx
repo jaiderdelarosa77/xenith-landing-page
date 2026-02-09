@@ -40,7 +40,7 @@ export default function ClientDetailPage({
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-96">
-        <div className="inline-block w-8 h-8 border-4 border-violet-500 border-t-transparent rounded-full animate-spin" />
+        <div className="inline-block w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full animate-spin" />
       </div>
     )
   }
@@ -98,7 +98,7 @@ export default function ClientDetailPage({
             <Card.Content>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex items-start gap-3">
-                  <Mail className="w-5 h-5 text-violet-400 mt-0.5" />
+                  <Mail className="w-5 h-5 text-orange-400 mt-0.5" />
                   <div>
                     <p className="text-sm text-gray-400">Email</p>
                     <p className="font-medium">{clientData.email}</p>
@@ -107,7 +107,7 @@ export default function ClientDetailPage({
 
                 {clientData.phone && (
                   <div className="flex items-start gap-3">
-                    <Phone className="w-5 h-5 text-violet-400 mt-0.5" />
+                    <Phone className="w-5 h-5 text-orange-400 mt-0.5" />
                     <div>
                       <p className="text-sm text-gray-400">Teléfono</p>
                       <p className="font-medium">{clientData.phone}</p>
@@ -117,7 +117,7 @@ export default function ClientDetailPage({
 
                 {clientData.company && (
                   <div className="flex items-start gap-3">
-                    <Building2 className="w-5 h-5 text-violet-400 mt-0.5" />
+                    <Building2 className="w-5 h-5 text-orange-400 mt-0.5" />
                     <div>
                       <p className="text-sm text-gray-400">Empresa</p>
                       <p className="font-medium">{clientData.company}</p>
@@ -127,7 +127,7 @@ export default function ClientDetailPage({
 
                 {clientData.nit && (
                   <div className="flex items-start gap-3">
-                    <FileText className="w-5 h-5 text-violet-400 mt-0.5" />
+                    <FileText className="w-5 h-5 text-orange-400 mt-0.5" />
                     <div>
                       <p className="text-sm text-gray-400">NIT / Documento</p>
                       <p className="font-medium font-mono">{clientData.nit}</p>
@@ -136,7 +136,7 @@ export default function ClientDetailPage({
                 )}
 
                 <div className="flex items-start gap-3">
-                  <FileDown className="w-5 h-5 text-violet-400 mt-0.5" />
+                  <FileDown className="w-5 h-5 text-orange-400 mt-0.5" />
                   <div>
                     <p className="text-sm text-gray-400">RUT</p>
                     {clientData.rutUrl ? (
@@ -154,7 +154,7 @@ export default function ClientDetailPage({
 
                 {(clientData.address || clientData.city || clientData.country) && (
                   <div className="flex items-start gap-3 md:col-span-2">
-                    <MapPin className="w-5 h-5 text-violet-400 mt-0.5" />
+                    <MapPin className="w-5 h-5 text-orange-400 mt-0.5" />
                     <div>
                       <p className="text-sm text-gray-400">Dirección</p>
                       <p className="font-medium">

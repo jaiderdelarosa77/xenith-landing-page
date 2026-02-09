@@ -15,7 +15,7 @@ const typeConfig = {
   CHECK_IN: { label: 'Entrada', icon: ArrowDownToLine, className: 'bg-green-500/10 text-green-400' },
   CHECK_OUT: { label: 'Salida', icon: ArrowUpFromLine, className: 'bg-blue-500/10 text-blue-400' },
   ADJUSTMENT: { label: 'Ajuste', icon: Settings, className: 'bg-amber-500/10 text-amber-400' },
-  ENROLLMENT: { label: 'Registro', icon: Plus, className: 'bg-violet-500/10 text-violet-400' },
+  ENROLLMENT: { label: 'Registro', icon: Plus, className: 'bg-orange-500/10 text-orange-400' },
   TRANSFER: { label: 'Transferencia', icon: Repeat, className: 'bg-cyan-500/10 text-cyan-400' },
 }
 
@@ -69,7 +69,7 @@ export function MovementsTable({ movements }: MovementsTableProps) {
                   {movement.inventoryItem ? (
                     <Link
                       href={`/dashboard/inventario/items/${movement.inventoryItem.id}`}
-                      className="text-violet-400 hover:text-violet-300"
+                      className="text-orange-400 hover:text-orange-300"
                     >
                       <div>
                         <span className="font-medium">

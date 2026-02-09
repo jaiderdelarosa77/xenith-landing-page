@@ -41,7 +41,7 @@ export default function EditClientPage({
   if (isLoading || !clientData) {
     return (
       <div className="flex items-center justify-center h-96">
-        <div className="inline-block w-8 h-8 border-4 border-violet-500 border-t-transparent rounded-full animate-spin" />
+        <div className="inline-block w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full animate-spin" />
       </div>
     )
   }

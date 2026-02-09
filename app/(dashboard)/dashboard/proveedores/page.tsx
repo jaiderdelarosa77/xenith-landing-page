@@ -65,7 +65,7 @@ export default function SuppliersPage() {
         <Card.Content>
           {isLoading ? (
             <div className="text-center py-12">
-              <div className="inline-block w-8 h-8 border-4 border-violet-500 border-t-transparent rounded-full animate-spin" />
+              <div className="inline-block w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full animate-spin" />
               <p className="text-gray-400 mt-4">Cargando proveedores...</p>
             </div>
           ) : (

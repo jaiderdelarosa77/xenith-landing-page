@@ -65,16 +65,16 @@ export default function InicioPage() {
             ].map((service, index) => (
               <div
                 key={index}
-                className="glass p-8 rounded-xl hover:border-violet-500/40 transition-all duration-200 group"
+                className="glass p-8 rounded-xl hover:border-orange-500/40 transition-all duration-200 group"
               >
-                <h3 className="text-xl font-bold text-gray-200 mb-3 group-hover:text-violet-400 transition-colors">
+                <h3 className="text-xl font-bold text-gray-200 mb-3 group-hover:text-orange-400 transition-colors">
                   {service.title}
                 </h3>
                 <p className="text-gray-400 mb-4 text-sm">{service.description}</p>
                 <ul className="space-y-2">
                   {service.features.map((feature, i) => (
                     <li key={i} className="text-sm text-gray-500 flex items-center">
-                      <span className="w-1.5 h-1.5 bg-violet-500 rounded-full mr-2" />
+                      <span className="w-1.5 h-1.5 bg-orange-500 rounded-full mr-2" />
                       {feature}
                     </li>
                   ))}

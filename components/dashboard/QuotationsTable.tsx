@@ -50,7 +50,7 @@ export function QuotationsTable({ quotations, onDelete, onDownloadPdf }: Quotati
         <tbody>
           {quotations.map((quotation) => (
             <tr key={quotation.id}>
-              <td className="font-mono text-sm text-violet-400">
+              <td className="font-mono text-sm text-orange-400">
                 {quotation.quotationNumber}
               </td>
               <td className="font-medium">{quotation.title}</td>

@@ -31,8 +31,8 @@ export default function NewConceptPage() {
       </div>
 
       <div className="flex items-center gap-3">
-        <div className="p-2 rounded-lg bg-indigo-500/10">
-          <FileText className="w-6 h-6 text-indigo-400" />
+        <div className="p-2 rounded-lg bg-amber-500/10">
+          <FileText className="w-6 h-6 text-orange-400" />
         </div>
         <div>
           <h1 className="text-3xl font-bold">Nuevo Concepto</h1>

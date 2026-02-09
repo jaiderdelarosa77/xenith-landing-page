@@ -79,7 +79,7 @@ export function ProductForm({
             Categoría *
           </label>
           <select
-            className="w-full px-4 py-2.5 rounded-lg bg-gray-800 border border-gray-700 text-gray-200 focus:outline-none focus:ring-2 focus:ring-violet-500"
+            className="w-full px-4 py-2.5 rounded-lg bg-gray-800 border border-gray-700 text-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-500"
             {...register('categoryId')}
           >
             <option value="">Seleccionar categoría...</option>
@@ -97,7 +97,7 @@ export function ProductForm({
             Estado
           </label>
           <select
-            className="w-full px-4 py-2.5 rounded-lg bg-gray-800 border border-gray-700 text-gray-200 focus:outline-none focus:ring-2 focus:ring-violet-500"
+            className="w-full px-4 py-2.5 rounded-lg bg-gray-800 border border-gray-700 text-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-500"
             {...register('status')}
           >
             <option value="ACTIVE">Activo</option>

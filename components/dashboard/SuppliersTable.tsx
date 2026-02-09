@@ -47,7 +47,7 @@ export function SuppliersTable({ suppliers, onDelete }: SuppliersTableProps) {
                 {supplier.email ? (
                   <a
                     href={`mailto:${supplier.email}`}
-                    className="text-violet-400 hover:text-violet-300 flex items-center gap-1"
+                    className="text-orange-400 hover:text-orange-300 flex items-center gap-1"
                   >
                     <Mail className="w-3 h-3" />
                     {supplier.email}

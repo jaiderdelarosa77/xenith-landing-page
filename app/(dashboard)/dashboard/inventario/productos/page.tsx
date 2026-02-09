@@ -70,7 +70,7 @@ export default function ProductsPage() {
             </form>
             <div className="flex gap-2">
               <select
-                className="px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 text-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
+                className="px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 text-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
                 value={filters.categoryId}
                 onChange={(e) => setFilters({ categoryId: e.target.value })}
               >
@@ -80,7 +80,7 @@ export default function ProductsPage() {
                 ))}
               </select>
               <select
-                className="px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 text-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500"
+                className="px-3 py-2 rounded-lg bg-gray-800 border border-gray-700 text-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
                 value={filters.status}
                 onChange={(e) => setFilters({ status: e.target.value })}
               >
@@ -94,7 +94,7 @@ export default function ProductsPage() {
         <Card.Content>
           {isLoading ? (
             <div className="text-center py-12">
-              <div className="inline-block w-8 h-8 border-4 border-violet-500 border-t-transparent rounded-full animate-spin" />
+              <div className="inline-block w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full animate-spin" />
               <p className="text-gray-400 mt-4">Cargando productos...</p>
             </div>
           ) : (

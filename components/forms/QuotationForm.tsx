@@ -276,7 +276,7 @@ export function QuotationForm({
   if (loadingData) {
     return (
       <div className="flex items-center justify-center py-12">
-        <div className="inline-block w-8 h-8 border-4 border-violet-500 border-t-transparent rounded-full animate-spin" />
+        <div className="inline-block w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full animate-spin" />
       </div>
     )
   }
@@ -537,7 +537,7 @@ export function QuotationForm({
             <div className="flex items-center justify-between">
               <div>
                 <h3 className="text-lg font-semibold flex items-center gap-2">
-                  <Package className="w-5 h-5 text-violet-400" />
+                  <Package className="w-5 h-5 text-orange-400" />
                   Items Individuales
                 </h3>
                 <p className="text-sm text-gray-400 mt-1">
@@ -585,7 +585,7 @@ export function QuotationForm({
                       key={field.id}
                       className={`grid grid-cols-12 gap-4 p-4 rounded-lg border ${
                         isInventoryItem
-                          ? 'bg-violet-500/5 border-violet-500/20'
+                          ? 'bg-orange-500/5 border-orange-500/20'
                           : 'bg-gray-900/30 border-gray-800'
                       }`}
                     >
@@ -595,7 +595,7 @@ export function QuotationForm({
                             Descripcion *
                           </label>
                           {isInventoryItem && (
-                            <span className="px-2 py-0.5 rounded text-xs bg-violet-500/20 text-violet-400">
+                            <span className="px-2 py-0.5 rounded text-xs bg-orange-500/20 text-orange-400">
                               Inventario
                             </span>
                           )}
@@ -707,7 +707,7 @@ export function QuotationForm({
                 {itemsSubtotal > 0 && (
                   <div className="flex justify-between items-center py-2 text-sm">
                     <span className="text-gray-400">Items ({itemFields.length})</span>
-                    <span className="text-violet-400">{formatCurrency(itemsSubtotal)}</span>
+                    <span className="text-orange-400">{formatCurrency(itemsSubtotal)}</span>
                   </div>
                 )}
                 <div className="flex justify-between items-center py-2 border-b border-gray-800">
@@ -749,7 +749,7 @@ export function QuotationForm({
                   </div>
                 </div>
 
-                <div className="flex justify-between items-center py-3 border-t-2 border-violet-500/50">
+                <div className="flex justify-between items-center py-3 border-t-2 border-orange-500/50">
                   <span className="text-lg font-semibold">Total</span>
                   <span className="text-2xl font-bold text-green-400">
                     {formatCurrency(total)}

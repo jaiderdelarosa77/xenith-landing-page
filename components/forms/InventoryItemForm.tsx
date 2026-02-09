@@ -63,7 +63,7 @@ export function InventoryItemForm({
             Producto *
           </label>
           <select
-            className="w-full px-4 py-2.5 rounded-lg bg-gray-800 border border-gray-700 text-gray-200 focus:outline-none focus:ring-2 focus:ring-violet-500"
+            className="w-full px-4 py-2.5 rounded-lg bg-gray-800 border border-gray-700 text-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-500"
             {...register('productId')}
           >
             <option value="">Seleccionar producto...</option>
@@ -83,7 +83,7 @@ export function InventoryItemForm({
             Tipo
           </label>
           <select
-            className="w-full px-4 py-2.5 rounded-lg bg-gray-800 border border-gray-700 text-gray-200 focus:outline-none focus:ring-2 focus:ring-violet-500"
+            className="w-full px-4 py-2.5 rounded-lg bg-gray-800 border border-gray-700 text-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-500"
             {...register('type')}
           >
             <option value="UNIT">Unidad</option>
@@ -110,7 +110,7 @@ export function InventoryItemForm({
             Estado
           </label>
           <select
-            className="w-full px-4 py-2.5 rounded-lg bg-gray-800 border border-gray-700 text-gray-200 focus:outline-none focus:ring-2 focus:ring-violet-500"
+            className="w-full px-4 py-2.5 rounded-lg bg-gray-800 border border-gray-700 text-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-500"
             {...register('status')}
           >
             <option value="IN">En Bodega</option>
@@ -125,7 +125,7 @@ export function InventoryItemForm({
             Condición
           </label>
           <select
-            className="w-full px-4 py-2.5 rounded-lg bg-gray-800 border border-gray-700 text-gray-200 focus:outline-none focus:ring-2 focus:ring-violet-500"
+            className="w-full px-4 py-2.5 rounded-lg bg-gray-800 border border-gray-700 text-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-500"
             {...register('condition')}
           >
             <option value="">Seleccionar...</option>
@@ -149,7 +149,7 @@ export function InventoryItemForm({
               Contenedor
             </label>
             <select
-              className="w-full px-4 py-2.5 rounded-lg bg-gray-800 border border-gray-700 text-gray-200 focus:outline-none focus:ring-2 focus:ring-violet-500"
+              className="w-full px-4 py-2.5 rounded-lg bg-gray-800 border border-gray-700 text-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-500"
               {...register('containerId')}
             >
               <option value="">Sin contenedor</option>

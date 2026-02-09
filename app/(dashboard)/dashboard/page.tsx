@@ -37,8 +37,8 @@ export default function DashboardPage() {
           value={12}
           icon={FolderKanban}
           trend={{ value: 8.2, isPositive: true }}
-          iconColor="text-violet-400"
-          iconBgColor="bg-violet-500/10"
+          iconColor="text-orange-400"
+          iconBgColor="bg-orange-500/10"
         />
 
         <StatsCard
@@ -83,7 +83,7 @@ export default function DashboardPage() {
             <CardContent>
               <div className="space-y-4">
                 {[
-                  { label: 'En Progreso', value: 5, color: 'bg-violet-500', percentage: 42 },
+                  { label: 'En Progreso', value: 5, color: 'bg-orange-500', percentage: 42 },
                   { label: 'Prospecto', value: 4, color: 'bg-blue-500', percentage: 33 },
                   { label: 'En Pausa', value: 2, color: 'bg-amber-500', percentage: 17 },
                   { label: 'Completados', value: 1, color: 'bg-green-500', percentage: 8 },

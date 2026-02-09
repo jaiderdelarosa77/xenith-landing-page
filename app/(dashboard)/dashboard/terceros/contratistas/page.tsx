@@ -48,7 +48,7 @@ function ContractorsTable({ contractors, onDelete }: { contractors: Supplier[], 
               <td className="text-gray-400">{contractor.email || '-'}</td>
               <td className="text-gray-400">{contractor.phone || '-'}</td>
               <td>
-                <span className="px-2 py-1 rounded-full text-xs font-medium bg-violet-500/10 text-violet-400">
+                <span className="px-2 py-1 rounded-full text-xs font-medium bg-orange-500/10 text-orange-400">
                   {contractor._count?.products || 0} productos
                 </span>
               </td>
@@ -150,7 +150,7 @@ export default function ContractorsPage() {
         <Card.Content>
           {isLoading ? (
             <div className="text-center py-12">
-              <div className="inline-block w-8 h-8 border-4 border-violet-500 border-t-transparent rounded-full animate-spin" />
+              <div className="inline-block w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full animate-spin" />
               <p className="text-gray-400 mt-4">Cargando contratistas...</p>
             </div>
           ) : (

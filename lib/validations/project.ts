@@ -91,7 +91,7 @@ export const statusLabels: Record<ProjectStatus, string> = {
 
 export const statusColors: Record<ProjectStatus, string> = {
   PROSPECT: 'bg-blue-500/10 text-blue-400 border-blue-500/20',
-  IN_PROGRESS: 'bg-violet-500/10 text-violet-400 border-violet-500/20',
+  IN_PROGRESS: 'bg-orange-500/10 text-orange-400 border-orange-500/20',
   ON_HOLD: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
   COMPLETED: 'bg-green-500/10 text-green-400 border-green-500/20',
   CANCELLED: 'bg-red-500/10 text-red-400 border-red-500/20',
@@ -119,6 +119,6 @@ export const taskStatusLabels: Record<TaskStatus, string> = {
 
 export const taskStatusColors: Record<TaskStatus, string> = {
   TODO: 'bg-gray-500/10 text-gray-400 border-gray-500/20',
-  IN_PROGRESS: 'bg-violet-500/10 text-violet-400 border-violet-500/20',
+  IN_PROGRESS: 'bg-orange-500/10 text-orange-400 border-orange-500/20',
   DONE: 'bg-green-500/10 text-green-400 border-green-500/20',
 }

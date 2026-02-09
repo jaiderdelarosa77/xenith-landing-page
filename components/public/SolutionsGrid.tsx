@@ -141,12 +141,12 @@ export function SolutionsGrid() {
     >
       {solutions.map((solution, index) => (
         <motion.div key={index} variants={item}>
-          <Card variant="glass" className="h-full hover:border-violet-500/40 transition-all duration-200 group">
+          <Card variant="glass" className="h-full hover:border-orange-500/40 transition-all duration-200 group">
             <CardHeader>
-              <div className="w-12 h-12 rounded-lg bg-violet-500/10 flex items-center justify-center mb-4 group-hover:bg-violet-500/20 transition-colors">
-                <solution.icon className="w-6 h-6 text-violet-400" />
+              <div className="w-12 h-12 rounded-lg bg-orange-500/10 flex items-center justify-center mb-4 group-hover:bg-orange-500/20 transition-colors">
+                <solution.icon className="w-6 h-6 text-orange-400" />
               </div>
-              <CardTitle className="group-hover:text-violet-400 transition-colors">
+              <CardTitle className="group-hover:text-orange-400 transition-colors">
                 {solution.title}
               </CardTitle>
               <CardDescription>{solution.description}</CardDescription>
@@ -155,7 +155,7 @@ export function SolutionsGrid() {
               <ul className="space-y-2">
                 {solution.features.map((feature, i) => (
                   <li key={i} className="text-sm text-gray-400 flex items-start">
-                    <span className="w-1.5 h-1.5 bg-violet-500 rounded-full mr-2 mt-1.5 flex-shrink-0" />
+                    <span className="w-1.5 h-1.5 bg-orange-500 rounded-full mr-2 mt-1.5 flex-shrink-0" />
                     <span>{feature}</span>
                   </li>
                 ))}

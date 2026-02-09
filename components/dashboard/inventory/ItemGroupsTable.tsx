@@ -57,7 +57,7 @@ export function ItemGroupsTable({ groups, onDelete }: ItemGroupsTableProps) {
                   {group.description || '-'}
                 </td>
                 <td>
-                  <span className="px-2 py-1 rounded-full text-xs font-medium bg-violet-500/10 text-violet-400">
+                  <span className="px-2 py-1 rounded-full text-xs font-medium bg-orange-500/10 text-orange-400">
                     {group._count?.items || 0} items
                   </span>
                 </td>

@@ -45,7 +45,7 @@ export default function RootLayout({
               },
               success: {
                 iconTheme: {
-                  primary: 'rgb(139, 92, 246)',
+                  primary: 'rgb(245, 146, 10)',
                   secondary: 'white',
                 },
               },

@@ -21,11 +21,11 @@ export function StatsCard({
   icon: Icon,
   trend,
   description,
-  iconColor = 'text-violet-400',
-  iconBgColor = 'bg-violet-500/10',
+  iconColor = 'text-orange-400',
+  iconBgColor = 'bg-orange-500/10',
 }: StatsCardProps) {
   return (
-    <Card variant="glass" className="p-6 hover:border-violet-500/40 transition-all duration-200">
+    <Card variant="glass" className="p-6 hover:border-orange-500/40 transition-all duration-200">
       <div className="flex items-start justify-between">
         <div className="flex-1">
           <p className="text-sm font-medium text-gray-400 mb-1">{title}</p>

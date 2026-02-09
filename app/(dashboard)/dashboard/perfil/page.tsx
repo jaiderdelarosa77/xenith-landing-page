@@ -86,7 +86,7 @@ export default function PerfilPage() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-violet-500"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500"></div>
       </div>
     )
   }
@@ -106,7 +106,7 @@ export default function PerfilPage() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <User className="w-5 h-5 text-violet-400" />
+              <User className="w-5 h-5 text-orange-400" />
               Informacion Personal
             </CardTitle>
             <CardDescription>
@@ -184,7 +184,7 @@ export default function PerfilPage() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Lock className="w-5 h-5 text-violet-400" />
+              <Lock className="w-5 h-5 text-orange-400" />
               Seguridad
             </CardTitle>
             <CardDescription>

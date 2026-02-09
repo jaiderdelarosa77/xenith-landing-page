@@ -63,8 +63,8 @@ export default function ContactoPage() {
               <div className="space-y-6">
                 {contactInfo.map((info, index) => (
                   <div key={index} className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-lg bg-violet-500/10 flex items-center justify-center flex-shrink-0">
-                      <info.icon className="w-5 h-5 text-violet-400" />
+                    <div className="w-10 h-10 rounded-lg bg-orange-500/10 flex items-center justify-center flex-shrink-0">
+                      <info.icon className="w-5 h-5 text-orange-400" />
                     </div>
                     <div>
                       <h3 className="text-sm font-medium text-gray-400 mb-1">
@@ -73,7 +73,7 @@ export default function ContactoPage() {
                       {info.link ? (
                         <a
                           href={info.link}
-                          className="text-gray-200 hover:text-violet-400 transition-colors"
+                          className="text-gray-200 hover:text-orange-400 transition-colors"
                         >
                           {info.value}
                         </a>
@@ -87,23 +87,23 @@ export default function ContactoPage() {
             </Card>
 
             {/* Additional Info Card */}
-            <Card variant="gradient" className="border-violet-500/20">
+            <Card variant="gradient" className="border-orange-500/20">
               <h3 className="text-lg font-bold mb-3">¿Por qué elegirnos?</h3>
               <ul className="space-y-2 text-sm text-gray-300">
                 <li className="flex items-start">
-                  <span className="w-1.5 h-1.5 bg-violet-400 rounded-full mr-2 mt-1.5 flex-shrink-0" />
+                  <span className="w-1.5 h-1.5 bg-orange-400 rounded-full mr-2 mt-1.5 flex-shrink-0" />
                   <span>Respuesta en menos de 24 horas</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="w-1.5 h-1.5 bg-violet-400 rounded-full mr-2 mt-1.5 flex-shrink-0" />
+                  <span className="w-1.5 h-1.5 bg-orange-400 rounded-full mr-2 mt-1.5 flex-shrink-0" />
                   <span>Consultoría inicial gratuita</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="w-1.5 h-1.5 bg-violet-400 rounded-full mr-2 mt-1.5 flex-shrink-0" />
+                  <span className="w-1.5 h-1.5 bg-orange-400 rounded-full mr-2 mt-1.5 flex-shrink-0" />
                   <span>Cotización sin compromiso</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="w-1.5 h-1.5 bg-violet-400 rounded-full mr-2 mt-1.5 flex-shrink-0" />
+                  <span className="w-1.5 h-1.5 bg-orange-400 rounded-full mr-2 mt-1.5 flex-shrink-0" />
                   <span>Equipo experto y certificado</span>
                 </li>
               </ul>

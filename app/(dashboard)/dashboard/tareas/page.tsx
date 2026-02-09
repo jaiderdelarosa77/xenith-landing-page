@@ -130,7 +130,7 @@ export default function TareasPage() {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold flex items-center gap-3">
-            <ListTodo className="w-8 h-8 text-violet-400" />
+            <ListTodo className="w-8 h-8 text-orange-400" />
             Tareas
           </h1>
           <p className="text-gray-400 mt-1">
@@ -151,7 +151,7 @@ export default function TareasPage() {
         </div>
         <div className="bg-gray-900/50 border border-gray-800 rounded-lg p-4">
           <p className="text-sm text-gray-400">En Progreso</p>
-          <p className="text-2xl font-bold mt-1 text-violet-400">{inProgressTasks}</p>
+          <p className="text-2xl font-bold mt-1 text-orange-400">{inProgressTasks}</p>
         </div>
         <div className="bg-gray-900/50 border border-gray-800 rounded-lg p-4">
           <p className="text-sm text-gray-400">Completadas</p>
@@ -212,7 +212,7 @@ export default function TareasPage() {
         <Card.Content>
           {isLoading ? (
             <div className="text-center py-12">
-              <div className="inline-block w-8 h-8 border-4 border-violet-500 border-t-transparent rounded-full animate-spin" />
+              <div className="inline-block w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full animate-spin" />
               <p className="text-gray-400 mt-4">Cargando tareas...</p>
             </div>
           ) : tasks.length === 0 ? (
@@ -255,8 +255,8 @@ export default function TareasPage() {
                               task.status === 'DONE'
                                 ? 'text-green-400 hover:text-gray-400'
                                 : task.status === 'IN_PROGRESS'
-                                ? 'text-violet-400 hover:text-green-400'
-                                : 'text-gray-500 hover:text-violet-400'
+                                ? 'text-orange-400 hover:text-green-400'
+                                : 'text-gray-500 hover:text-orange-400'
                             }`}
                             title={`Cambiar estado: ${taskStatusLabels[task.status as TaskStatus]}`}
                           >
@@ -292,7 +292,7 @@ export default function TareasPage() {
                               onChange={(e) =>
                                 handleStatusChange(task.id, e.target.value as TaskStatus)
                               }
-                              className="text-xs bg-gray-900 border border-gray-700 rounded-md px-2 py-1 text-gray-300 focus:outline-none focus:ring-1 focus:ring-violet-500"
+                              className="text-xs bg-gray-900 border border-gray-700 rounded-md px-2 py-1 text-gray-300 focus:outline-none focus:ring-1 focus:ring-orange-500"
                             >
                               {Object.entries(taskStatusLabels).map(([value, label]) => (
                                 <option key={value} value={value}>
@@ -315,7 +315,7 @@ export default function TareasPage() {
                           {task.project && (
                             <Link
                               href={`/dashboard/proyectos/${task.project.id}`}
-                              className="flex items-center gap-1 text-xs text-violet-400 hover:text-violet-300 transition-colors"
+                              className="flex items-center gap-1 text-xs text-orange-400 hover:text-orange-300 transition-colors"
                             >
                               <FolderKanban className="w-3.5 h-3.5" />
                               {task.project.title}

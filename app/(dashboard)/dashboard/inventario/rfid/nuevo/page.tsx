@@ -97,7 +97,7 @@ export default function NewRfidTagPage() {
         <Card>
           <Card.Header>
             <div className="flex items-center gap-2">
-              <Radio className="w-5 h-5 text-violet-400" />
+              <Radio className="w-5 h-5 text-orange-400" />
               <h2 className="text-lg font-semibold">Información del Tag</h2>
             </div>
           </Card.Header>
@@ -178,7 +178,7 @@ export default function NewRfidTagPage() {
                       key={item.id}
                       className={`flex items-center justify-between p-3 rounded-lg cursor-pointer transition-colors ${
                         selectedItem === item.id
-                          ? 'bg-violet-500/20 border border-violet-500/50'
+                          ? 'bg-orange-500/20 border border-orange-500/50'
                           : 'bg-gray-800/50 hover:bg-gray-800 border border-transparent'
                       }`}
                       onClick={() => handleItemSelect(item.id)}
@@ -190,7 +190,7 @@ export default function NewRfidTagPage() {
                         </p>
                       </div>
                       {selectedItem === item.id && (
-                        <span className="text-xs text-violet-400 font-medium">Seleccionado</span>
+                        <span className="text-xs text-orange-400 font-medium">Seleccionado</span>
                       )}
                     </div>
                   ))

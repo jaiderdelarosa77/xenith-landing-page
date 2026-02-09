@@ -32,7 +32,7 @@ export function Alert({
       icon: <XCircle className="w-5 h-5" />,
     },
     info: {
-      container: 'bg-violet-500/10 text-violet-400 border-violet-500/20',
+      container: 'bg-orange-500/10 text-orange-400 border-orange-500/20',
       icon: <Info className="w-5 h-5" />,
     },
   }

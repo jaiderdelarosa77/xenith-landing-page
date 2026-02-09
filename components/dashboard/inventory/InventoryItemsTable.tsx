@@ -22,7 +22,7 @@ const statusConfig = {
 }
 
 const typeConfig = {
-  UNIT: { label: 'Unidad', className: 'bg-violet-500/10 text-violet-400' },
+  UNIT: { label: 'Unidad', className: 'bg-orange-500/10 text-orange-400' },
   CONTAINER: { label: 'Contenedor', className: 'bg-cyan-500/10 text-cyan-400' },
   BULK: { label: 'Bulk', className: 'bg-gray-500/10 text-gray-400' },
 }

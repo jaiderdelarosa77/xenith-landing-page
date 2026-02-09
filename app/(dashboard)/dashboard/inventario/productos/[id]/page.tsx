@@ -95,7 +95,7 @@ export default function ProductDetailPage() {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
-          <div className="inline-block w-8 h-8 border-4 border-violet-500 border-t-transparent rounded-full animate-spin" />
+          <div className="inline-block w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full animate-spin" />
           <p className="text-gray-400 mt-4">Cargando producto...</p>
         </div>
       </div>
@@ -158,7 +158,7 @@ export default function ProductDetailPage() {
           <Card>
             <Card.Header>
               <div className="flex items-center gap-2">
-                <Package className="w-5 h-5 text-violet-400" />
+                <Package className="w-5 h-5 text-orange-400" />
                 <h2 className="text-lg font-semibold">Información General</h2>
               </div>
             </Card.Header>
@@ -192,7 +192,7 @@ export default function ProductDetailPage() {
                 </div>
                 <div>
                   <label className="text-sm text-gray-400">Precio Alquiler</label>
-                  <p className="mt-1 font-semibold text-lg text-violet-400">
+                  <p className="mt-1 font-semibold text-lg text-orange-400">
                     {formatPrice(product.rentalPrice as number | null)}
                   </p>
                 </div>
@@ -219,9 +219,9 @@ export default function ProductDetailPage() {
             <Card.Header>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <Boxes className="w-5 h-5 text-violet-400" />
+                  <Boxes className="w-5 h-5 text-orange-400" />
                   <h2 className="text-lg font-semibold">Items en Inventario</h2>
-                  <span className="ml-2 px-2 py-0.5 rounded-full text-xs font-medium bg-violet-500/10 text-violet-400">
+                  <span className="ml-2 px-2 py-0.5 rounded-full text-xs font-medium bg-orange-500/10 text-orange-400">
                     {product._count?.inventoryItems || 0}
                   </span>
                 </div>
@@ -304,7 +304,7 @@ export default function ProductDetailPage() {
           <Card>
             <Card.Header>
               <div className="flex items-center gap-2">
-                <Building2 className="w-5 h-5 text-violet-400" />
+                <Building2 className="w-5 h-5 text-orange-400" />
                 <h2 className="text-lg font-semibold">Proveedores</h2>
               </div>
             </Card.Header>
@@ -327,7 +327,7 @@ export default function ProductDetailPage() {
                           <p className="text-sm font-semibold">{formatPrice(ps.cost)}</p>
                         )}
                         {ps.isPreferred && (
-                          <span className="text-xs text-violet-400">Preferido</span>
+                          <span className="text-xs text-orange-400">Preferido</span>
                         )}
                       </div>
                     </div>
@@ -346,7 +346,7 @@ export default function ProductDetailPage() {
           <Card>
             <Card.Header>
               <div className="flex items-center gap-2">
-                <FileText className="w-5 h-5 text-violet-400" />
+                <FileText className="w-5 h-5 text-orange-400" />
                 <h2 className="text-lg font-semibold">Detalles</h2>
               </div>
             </Card.Header>
