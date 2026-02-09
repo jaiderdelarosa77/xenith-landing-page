@@ -21,6 +21,7 @@ import {
   UsersRound,
   Briefcase,
   UserCircle,
+  ListTodo,
   LucideIcon,
 } from 'lucide-react'
 import { cn } from '@/lib/utils/cn'
@@ -58,6 +59,12 @@ export function Sidebar({ isOpen = true, onClose }: SidebarProps) {
       href: '/dashboard/proyectos',
       icon: FolderKanban,
       module: 'proyectos',
+    },
+    {
+      name: 'Tareas',
+      href: '/dashboard/tareas',
+      icon: ListTodo,
+      module: 'tareas',
     },
     {
       name: 'Clientes',

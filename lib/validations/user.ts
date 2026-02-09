@@ -7,6 +7,7 @@ export type UserRole = typeof userRoles[number]
 export const systemModules = [
   'dashboard',
   'proyectos',
+  'tareas',
   'clientes',
   'cotizaciones',
   'inventario',
@@ -26,6 +27,7 @@ export type SystemModule = typeof systemModules[number]
 export const moduleLabels: Record<SystemModule, string> = {
   dashboard: 'Dashboard',
   proyectos: 'Proyectos',
+  tareas: 'Tareas',
   clientes: 'Clientes',
   cotizaciones: 'Cotizaciones',
   inventario: 'Inventario',
@@ -41,7 +43,7 @@ export const moduleLabels: Record<SystemModule, string> = {
 
 // Agrupacion de modulos para la UI
 export const moduleGroups = {
-  general: ['dashboard', 'proyectos', 'clientes', 'cotizaciones'],
+  general: ['dashboard', 'proyectos', 'tareas', 'clientes', 'cotizaciones'],
   inventario: ['inventario', 'productos', 'items', 'grupos', 'rfid', 'movimientos'],
   terceros: ['contratistas', 'conceptos'],
   configuracion: ['categorias'],
