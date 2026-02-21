@@ -1,5 +1,7 @@
 import type { NextConfig } from "next";
 
+const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
+
 const securityHeaders = [
   {
     key: 'X-DNS-Prefetch-Control',
@@ -37,7 +39,7 @@ const securityHeaders = [
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' blob: data: https:",
       "font-src 'self' data:",
-      "connect-src 'self' https:",
+      `connect-src 'self' https: ${apiUrl} http://localhost:8000 http://127.0.0.1:8000`,
       "frame-ancestors 'self'",
       "form-action 'self'",
       "base-uri 'self'",

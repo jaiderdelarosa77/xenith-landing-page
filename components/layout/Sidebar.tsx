@@ -30,7 +30,7 @@ import { cn } from '@/lib/utils/cn'
 import { Button } from '@/components/ui/Button'
 import { useAuth } from '@/hooks/useAuth'
 import { usePermissions } from '@/hooks/usePermissions'
-import { SUPERADMIN_EMAIL, SystemModule } from '@/lib/validations/user'
+import { SystemModule } from '@/lib/validations/user'
 
 interface SidebarProps {
   isOpen?: boolean

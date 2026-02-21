@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/Input'
 import { Textarea } from '@/components/ui/Textarea'
 import { Select } from '@/components/ui/Select'
 import { Card } from '@/components/ui/Card'
+import { apiFetch } from '@/lib/api/client'
 
 interface ConceptFormProps {
   initialData?: Concept
@@ -41,7 +42,7 @@ export function ConceptForm({ initialData, onSubmit, isLoading }: ConceptFormPro
   useEffect(() => {
     const fetchSuppliers = async () => {
       try {
-        const response = await fetch('/api/suppliers')
+        const response = await apiFetch('/v1/suppliers')
         if (response.ok) {
           const data = await response.json()
           setSuppliers(data)

@@ -1,8 +1,9 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
-import { useSession } from 'next-auth/react'
 import { SystemModule, SUPERADMIN_EMAIL } from '@/lib/validations/user'
+import { apiFetch } from '@/lib/api/client'
+import { useAuthStore } from '@/store/authStore'
 
 interface Permission {
   module: string
@@ -21,18 +22,19 @@ interface UsePermissionsReturn {
 }
 
 export function usePermissions(): UsePermissionsReturn {
-  const { data: session, status } = useSession()
+  const user = useAuthStore((state) => state.user)
+  const authLoading = useAuthStore((state) => state.isLoading)
   const [permissions, setPermissions] = useState<Permission[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [userRole, setUserRole] = useState<string | null>(null)
 
-  const isSuperAdmin = session?.user?.email === SUPERADMIN_EMAIL
+  const isSuperAdmin = user?.email === SUPERADMIN_EMAIL
   const isAdmin = isSuperAdmin || userRole === 'ADMIN'
 
   const fetchPermissions = useCallback(async () => {
-    if (status === 'loading') return
+    if (authLoading) return
 
-    if (!session?.user) {
+    if (!user) {
       setPermissions([])
       setIsLoading(false)
       return
@@ -45,7 +47,7 @@ export function usePermissions(): UsePermissionsReturn {
     }
 
     try {
-      const response = await fetch('/api/profile')
+      const response = await apiFetch('/v1/profile')
 
       // Handle unauthorized/forbidden silently (user is logging out)
       if (response.status === 401 || response.status === 403) {
@@ -64,7 +66,7 @@ export function usePermissions(): UsePermissionsReturn {
     } finally {
       setIsLoading(false)
     }
-  }, [session, status, isSuperAdmin])
+  }, [user, authLoading, isSuperAdmin])
 
   useEffect(() => {
     fetchPermissions()
@@ -94,7 +96,7 @@ export function usePermissions(): UsePermissionsReturn {
 
   return {
     permissions,
-    isLoading: status === 'loading' || isLoading,
+    isLoading: authLoading || isLoading,
     canView,
     canEdit,
     isSuperAdmin,

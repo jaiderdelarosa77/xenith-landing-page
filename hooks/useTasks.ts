@@ -1,8 +1,9 @@
 'use client'
 
 import { useCallback } from 'react'
-import { useTaskStore, TaskWithRelations } from '@/store/taskStore'
+import { useTaskStore } from '@/store/taskStore'
 import { TaskStatus, Priority } from '@/lib/validations/project'
+import { apiFetch, apiUrl } from '@/lib/api/client'
 import toast from 'react-hot-toast'
 
 interface FetchTasksOptions {
@@ -34,7 +35,7 @@ export function useTasks() {
     setError(null)
 
     try {
-      const url = new URL('/api/tasks', window.location.origin)
+      const url = new URL(apiUrl('/v1/tasks'))
 
       if (options?.search) url.searchParams.set('search', options.search)
       if (options?.status) url.searchParams.set('status', options.status)
@@ -42,7 +43,7 @@ export function useTasks() {
       if (options?.assignedTo) url.searchParams.set('assignedTo', options.assignedTo)
       if (options?.myTasks) url.searchParams.set('myTasks', 'true')
 
-      const response = await fetch(url.toString())
+      const response = await fetch(url.toString(), { credentials: 'include' })
 
       if (!response.ok) {
         throw new Error('Error al obtener tareas')
@@ -61,11 +62,8 @@ export function useTasks() {
 
   const changeTaskStatus = useCallback(async (id: string, status: TaskStatus) => {
     try {
-      const response = await fetch(`/api/tasks/${id}`, {
+      const response = await apiFetch(`/v1/tasks/${id}`, {
         method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify({ status }),
       })
 

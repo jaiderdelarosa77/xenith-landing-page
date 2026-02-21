@@ -62,12 +62,15 @@ export function ProductThumbnail({
         title={hasValidImage && showPreviewOnClick ? 'Click para ampliar' : productName}
       >
         {hasValidImage ? (
-          <img
-            src={imageUrl}
-            alt={productName}
-            className="w-full h-full object-cover"
-            onError={handleImageError}
-          />
+          <>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={imageUrl}
+              alt={productName}
+              className="w-full h-full object-cover"
+              onError={handleImageError}
+            />
+          </>
         ) : (
           <ImageIcon className={cn('text-gray-600', iconSizeClasses[size])} />
         )}

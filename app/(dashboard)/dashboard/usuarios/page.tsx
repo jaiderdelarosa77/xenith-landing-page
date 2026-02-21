@@ -1,8 +1,9 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { useSession } from 'next-auth/react'
+import { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { useAuth } from '@/hooks/useAuth'
+import { apiFetch } from '@/lib/api/client'
 import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
@@ -11,7 +12,6 @@ import { Table } from '@/components/ui/Table'
 import {
   Plus,
   Edit,
-  Trash2,
   UserCheck,
   UserX,
   Shield,
@@ -36,7 +36,6 @@ import {
   moduleGroupLabels,
   SUPERADMIN_EMAIL,
 } from '@/lib/validations/user'
-import { cn } from '@/lib/utils/cn'
 
 type PermissionMap = Record<SystemModule, { canView: boolean; canEdit: boolean }>
 
@@ -49,7 +48,7 @@ const getDefaultPermissions = (): PermissionMap => {
 }
 
 export default function UsersPage() {
-  const { data: session, status } = useSession()
+  const { user: authUser, isLoading: authLoading } = useAuth()
   const router = useRouter()
   const [users, setUsers] = useState<User[]>([])
   const [isLoading, setIsLoading] = useState(true)
@@ -67,43 +66,12 @@ export default function UsersPage() {
   const [permissions, setPermissions] = useState<PermissionMap>(getDefaultPermissions())
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  // Check if current user is superadmin
-  const isSuperAdmin = session?.user?.email === SUPERADMIN_EMAIL
   const [hasAccess, setHasAccess] = useState<boolean | null>(null)
 
-  useEffect(() => {
-    if (status === 'loading') return
-
-    if (!session?.user) {
-      router.push('/dashboard')
-      return
-    }
-
-    // Superadmin always has access
-    if (session.user.email === SUPERADMIN_EMAIL) {
-      setHasAccess(true)
-      fetchUsers()
-      return
-    }
-
-    // Check role from profile
-    fetch('/api/profile')
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.role === 'ADMIN') {
-          setHasAccess(true)
-          fetchUsers()
-        } else {
-          router.push('/dashboard')
-        }
-      })
-      .catch(() => router.push('/dashboard'))
-  }, [session, status, router])
-
-  const fetchUsers = async () => {
+  const fetchUsers = useCallback(async () => {
     try {
       setIsLoading(true)
-      const response = await fetch('/api/users')
+      const response = await apiFetch('/v1/users')
 
       if (!response.ok) {
         if (response.status === 403) {
@@ -115,12 +83,41 @@ export default function UsersPage() {
 
       const data = await response.json()
       setUsers(data)
-    } catch (error) {
+    } catch {
       toast.error('Error al cargar usuarios')
     } finally {
       setIsLoading(false)
     }
-  }
+  }, [router])
+
+  useEffect(() => {
+    if (authLoading) return
+
+    if (!authUser) {
+      router.push('/dashboard')
+      return
+    }
+
+    // Superadmin always has access
+    if (authUser.email === SUPERADMIN_EMAIL) {
+      setHasAccess(true)
+      fetchUsers()
+      return
+    }
+
+    // Check role from profile
+    apiFetch('/v1/profile')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.role === 'ADMIN') {
+          setHasAccess(true)
+          fetchUsers()
+        } else {
+          router.push('/dashboard')
+        }
+      })
+      .catch(() => router.push('/dashboard'))
+  }, [authUser, authLoading, router, fetchUsers])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -128,14 +125,14 @@ export default function UsersPage() {
 
     try {
       const url = editingUser
-        ? `/api/users/${editingUser.id}`
-        : '/api/users'
+        ? `/v1/users/${editingUser.id}`
+        : '/v1/users'
 
       const method = editingUser ? 'PUT' : 'POST'
 
       // Convertir permisos a array
       const permissionsArray: Permission[] = Object.entries(permissions)
-        .filter(([_, p]) => p.canView || p.canEdit)
+        .filter(([, p]) => p.canView || p.canEdit)
         .map(([module, p]) => ({
           module: module as SystemModule,
           canView: p.canView,
@@ -157,9 +154,8 @@ export default function UsersPage() {
             permissions: permissionsArray,
           }
 
-      const response = await fetch(url, {
+      const response = await apiFetch(url, {
         method,
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       })
 
@@ -174,40 +170,18 @@ export default function UsersPage() {
       setShowModal(false)
       resetForm()
       fetchUsers()
-    } catch (error: any) {
-      toast.error(error.message || 'Error al guardar usuario')
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Error al guardar usuario'
+      toast.error(message)
     } finally {
       setIsSubmitting(false)
     }
   }
 
-  const handleDelete = async (user: User) => {
-    if (!confirm(`¿Deseas desactivar al usuario ${user.name || user.email}?`)) {
-      return
-    }
-
-    try {
-      const response = await fetch(`/api/users/${user.id}`, {
-        method: 'DELETE',
-      })
-
-      if (!response.ok) {
-        const error = await response.json()
-        throw new Error(error.error || 'Error al desactivar usuario')
-      }
-
-      toast.success('Usuario desactivado')
-      fetchUsers()
-    } catch (error: any) {
-      toast.error(error.message || 'Error al desactivar usuario')
-    }
-  }
-
   const handleToggleActive = async (user: User) => {
     try {
-      const response = await fetch(`/api/users/${user.id}`, {
+      const response = await apiFetch(`/v1/users/${user.id}`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ isActive: !user.isActive }),
       })
 
@@ -217,7 +191,7 @@ export default function UsersPage() {
 
       toast.success(user.isActive ? 'Usuario desactivado' : 'Usuario activado')
       fetchUsers()
-    } catch (error) {
+    } catch {
       toast.error('Error al actualizar usuario')
     }
   }
@@ -305,7 +279,7 @@ export default function UsersPage() {
     { value: 'ADMIN', label: 'Administrador' },
   ]
 
-  if (status === 'loading' || isLoading) {
+  if (authLoading || isLoading) {
     return (
       <div className="flex items-center justify-center h-96">
         <div className="inline-block w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full animate-spin" />

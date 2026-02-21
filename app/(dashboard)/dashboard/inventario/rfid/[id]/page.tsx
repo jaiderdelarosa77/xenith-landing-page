@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useParams, useRouter } from 'next/navigation'
+import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import { useRfidTags } from '@/hooks/useRfidTags'
 import { useInventory } from '@/hooks/useInventory'
@@ -41,7 +41,6 @@ interface Detection {
 
 export default function RfidTagDetailPage() {
   const params = useParams()
-  const router = useRouter()
   const { currentTag: tag, isLoading, fetchTag, enrollTag, unenrollTag } = useRfidTags()
   const { items, fetchItems } = useInventory()
   const [showEnrollModal, setShowEnrollModal] = useState(false)

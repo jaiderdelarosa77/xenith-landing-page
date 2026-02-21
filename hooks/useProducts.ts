@@ -2,7 +2,8 @@
 
 import { useCallback } from 'react'
 import { useProductStore } from '@/store/productStore'
-import { ProductFormData, Product, ProductSupplierFormData } from '@/lib/validations/product'
+import { ProductFormData, ProductSupplierFormData } from '@/lib/validations/product'
+import { apiFetch, apiUrl } from '@/lib/api/client'
 import toast from 'react-hot-toast'
 
 export function useProducts() {
@@ -33,12 +34,12 @@ export function useProducts() {
     setError(null)
 
     try {
-      const url = new URL('/api/products', window.location.origin)
+      const url = new URL(apiUrl('/v1/products'))
       if (options?.search) url.searchParams.set('search', options.search)
       if (options?.categoryId) url.searchParams.set('category', options.categoryId)
       if (options?.status) url.searchParams.set('status', options.status)
 
-      const response = await fetch(url.toString())
+      const response = await fetch(url.toString(), { credentials: 'include' })
 
       // Handle permission errors silently - just set empty array
       if (response.status === 401 || response.status === 403) {
@@ -68,7 +69,7 @@ export function useProducts() {
     setError(null)
 
     try {
-      const response = await fetch(`/api/products/${id}`)
+      const response = await apiFetch(`/v1/products/${id}`)
 
       if (!response.ok) {
         throw new Error('Error al obtener producto')
@@ -92,11 +93,8 @@ export function useProducts() {
     setError(null)
 
     try {
-      const response = await fetch('/api/products', {
+      const response = await apiFetch('/v1/products', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify(data),
       })
 
@@ -124,11 +122,8 @@ export function useProducts() {
     setError(null)
 
     try {
-      const response = await fetch(`/api/products/${id}`, {
+      const response = await apiFetch(`/v1/products/${id}`, {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify(data),
       })
 
@@ -156,7 +151,7 @@ export function useProducts() {
     setError(null)
 
     try {
-      const response = await fetch(`/api/products/${id}`, {
+      const response = await apiFetch(`/v1/products/${id}`, {
         method: 'DELETE',
       })
 
@@ -183,11 +178,8 @@ export function useProducts() {
     setError(null)
 
     try {
-      const response = await fetch(`/api/products/${productId}/suppliers`, {
+      const response = await apiFetch(`/v1/products/${productId}/suppliers`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify(data),
       })
 
@@ -214,7 +206,7 @@ export function useProducts() {
     setError(null)
 
     try {
-      const response = await fetch(`/api/products/${productId}/suppliers/${supplierId}`, {
+      const response = await apiFetch(`/v1/products/${productId}/suppliers/${supplierId}`, {
         method: 'DELETE',
       })
 

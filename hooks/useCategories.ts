@@ -2,7 +2,8 @@
 
 import { useCallback } from 'react'
 import { useCategoryStore } from '@/store/categoryStore'
-import { CategoryFormData, Category } from '@/lib/validations/category'
+import { CategoryFormData } from '@/lib/validations/category'
+import { apiFetch, apiUrl } from '@/lib/api/client'
 import toast from 'react-hot-toast'
 
 export function useCategories() {
@@ -27,12 +28,12 @@ export function useCategories() {
     setError(null)
 
     try {
-      const url = new URL('/api/categories', window.location.origin)
+      const url = new URL(apiUrl('/v1/categories'))
       if (search) {
         url.searchParams.set('search', search)
       }
 
-      const response = await fetch(url.toString())
+      const response = await fetch(url.toString(), { credentials: 'include' })
 
       // Handle permission errors silently - just set empty array
       if (response.status === 401 || response.status === 403) {
@@ -62,7 +63,7 @@ export function useCategories() {
     setError(null)
 
     try {
-      const response = await fetch(`/api/categories/${id}`)
+      const response = await apiFetch(`/v1/categories/${id}`)
 
       if (!response.ok) {
         throw new Error('Error al obtener categoría')
@@ -86,11 +87,8 @@ export function useCategories() {
     setError(null)
 
     try {
-      const response = await fetch('/api/categories', {
+      const response = await apiFetch('/v1/categories', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify(data),
       })
 
@@ -118,11 +116,8 @@ export function useCategories() {
     setError(null)
 
     try {
-      const response = await fetch(`/api/categories/${id}`, {
+      const response = await apiFetch(`/v1/categories/${id}`, {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify(data),
       })
 
@@ -150,7 +145,7 @@ export function useCategories() {
     setError(null)
 
     try {
-      const response = await fetch(`/api/categories/${id}`, {
+      const response = await apiFetch(`/v1/categories/${id}`, {
         method: 'DELETE',
       })
 

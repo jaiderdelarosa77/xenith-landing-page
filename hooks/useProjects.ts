@@ -2,7 +2,8 @@
 
 import { useCallback } from 'react'
 import { useProjectStore } from '@/store/projectStore'
-import { ProjectFormData, Project, ProjectStatus, Priority } from '@/lib/validations/project'
+import { ProjectFormData, ProjectStatus, Priority } from '@/lib/validations/project'
+import { apiFetch, apiUrl } from '@/lib/api/client'
 import toast from 'react-hot-toast'
 
 interface FetchProjectsOptions {
@@ -38,7 +39,7 @@ export function useProjects() {
     setError(null)
 
     try {
-      const url = new URL('/api/projects', window.location.origin)
+      const url = new URL(apiUrl('/v1/projects'))
 
       if (options?.search) url.searchParams.set('search', options.search)
       if (options?.status) url.searchParams.set('status', options.status)
@@ -46,7 +47,7 @@ export function useProjects() {
       if (options?.clientId) url.searchParams.set('clientId', options.clientId)
       if (options?.assignedTo) url.searchParams.set('assignedTo', options.assignedTo)
 
-      const response = await fetch(url.toString())
+      const response = await fetch(url.toString(), { credentials: 'include' })
 
       if (!response.ok) {
         throw new Error('Error al obtener proyectos')
@@ -68,7 +69,7 @@ export function useProjects() {
     setError(null)
 
     try {
-      const response = await fetch(`/api/projects/${id}`)
+      const response = await apiFetch(`/v1/projects/${id}`)
 
       if (!response.ok) {
         throw new Error('Error al obtener proyecto')
@@ -92,11 +93,8 @@ export function useProjects() {
     setError(null)
 
     try {
-      const response = await fetch('/api/projects', {
+      const response = await apiFetch('/v1/projects', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify(data),
       })
 
@@ -124,11 +122,8 @@ export function useProjects() {
     setError(null)
 
     try {
-      const response = await fetch(`/api/projects/${id}`, {
+      const response = await apiFetch(`/v1/projects/${id}`, {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify(data),
       })
 
@@ -156,7 +151,7 @@ export function useProjects() {
     setError(null)
 
     try {
-      const response = await fetch(`/api/projects/${id}`, {
+      const response = await apiFetch(`/v1/projects/${id}`, {
         method: 'DELETE',
       })
 

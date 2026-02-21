@@ -4,6 +4,7 @@ import { useState, useRef, useCallback } from 'react'
 import { ImagePlus, X } from 'lucide-react'
 import { cn } from '@/lib/utils/cn'
 import { Button } from './Button'
+import { apiUrl } from '@/lib/api/client'
 import toast from 'react-hot-toast'
 
 interface ImagePickerProps {
@@ -46,8 +47,9 @@ export function ImagePicker({
         const formData = new FormData()
         formData.append('file', file)
 
-        const uploadResponse = await fetch('/api/uploads/products', {
+        const uploadResponse = await fetch(apiUrl('/v1/uploads/products'), {
           method: 'POST',
+          credentials: 'include',
           body: formData,
         })
 
@@ -64,8 +66,9 @@ export function ImagePicker({
 
         // Best effort: if image was replaced, remove old file from R2.
         if (previousUrl && previousUrl !== nextUrl) {
-          await fetch('/api/uploads/products', {
+          await fetch(apiUrl('/v1/uploads/products'), {
             method: 'DELETE',
+            credentials: 'include',
             headers: {
               'Content-Type': 'application/json',
             },
@@ -127,8 +130,9 @@ export function ImagePicker({
       if (!confirmed) return
 
       try {
-        const response = await fetch('/api/uploads/products', {
+        const response = await fetch(apiUrl('/v1/uploads/products'), {
           method: 'DELETE',
+          credentials: 'include',
           headers: {
             'Content-Type': 'application/json',
           },
@@ -205,6 +209,7 @@ export function ImagePicker({
               className="relative aspect-video w-full max-w-[200px] mx-auto cursor-zoom-in"
               onClick={handleImageClick}
             >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={value}
                 alt="Preview"

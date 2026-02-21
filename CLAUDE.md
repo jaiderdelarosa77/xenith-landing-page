@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-XENITH CRM + Inventory Control System with RFID integration for audiovisual equipment rental. Built with Next.js 16 (App Router), TypeScript, Prisma ORM, PostgreSQL, and NextAuth.js v5.
+XENITH CRM + Inventory Control System with RFID integration for audiovisual equipment rental. Frontend in Next.js 16 (App Router), backend in FastAPI (`backend/`), PostgreSQL as database.
 
 ## Development Commands
 
@@ -33,19 +33,15 @@ npm run db:seed               # Seed demo data (creates superadmin: camilo.varga
 - `app/(auth)/` - Login page
 - `app/(dashboard)/` - Protected routes requiring authentication
 - `app/(public)/` - Public-facing pages (contacto)
-- `app/api/` - REST API endpoints
 
 ### API Pattern
-All API routes follow this pattern:
-1. Check session with `auth()` from `@/auth`
-2. Validate input with Zod schemas from `lib/validations/`
-3. Use Prisma client from `lib/db/prisma.ts`
-4. Return `NextResponse.json()`
+- El frontend consume FastAPI vía `lib/api/client.ts` (`NEXT_PUBLIC_API_URL`)
+- Rutas backend: `backend/app/api/v1/*`
+- Auth en backend con JWT en cookies HttpOnly
 
 ### State Management
 - **Zustand stores** (`store/`): Global state for auth, clients, projects, quotations, UI
 - **React Hook Form + Zod**: Form state and validation
-- **NextAuth Session**: JWT-based, 8-hour expiration
 
 ### Key Directories
 - `components/dashboard/` - Tables, stats cards, data display
@@ -88,8 +84,8 @@ All API routes follow this pattern:
 Copy `.env.example` to `.env`. Default values work with docker-compose PostgreSQL:
 ```
 DATABASE_URL="postgresql://xenith:xenith123@localhost:5432/xenith_db"
-AUTH_SECRET=<generate with: openssl rand -base64 32>
-NEXTAUTH_URL="http://localhost:3000"
 NEXT_PUBLIC_APP_URL="http://localhost:3000"
-RFID_API_KEY="your-rfid-reader-api-key"  # For external RFID reader integration
+NEXT_PUBLIC_API_URL="http://localhost:8000"
 ```
+
+Backend env: copiar `backend/.env.example` a `backend/.env`.

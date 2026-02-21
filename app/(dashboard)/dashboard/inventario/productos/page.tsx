@@ -8,7 +8,7 @@ import { ProductsTable } from '@/components/dashboard/inventory/ProductsTable'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Card } from '@/components/ui/Card'
-import { Plus, Search, Filter } from 'lucide-react'
+import { Plus, Search } from 'lucide-react'
 
 export default function ProductsPage() {
   const { products, isLoading, filters, setFilters, fetchProducts, deleteProduct } = useProducts()

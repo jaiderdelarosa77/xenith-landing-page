@@ -2,7 +2,8 @@
 
 import { useCallback } from 'react'
 import { useSupplierStore } from '@/store/supplierStore'
-import { SupplierFormData, Supplier } from '@/lib/validations/supplier'
+import { SupplierFormData } from '@/lib/validations/supplier'
+import { apiFetch, apiUrl } from '@/lib/api/client'
 import toast from 'react-hot-toast'
 
 export function useSuppliers() {
@@ -27,12 +28,12 @@ export function useSuppliers() {
     setError(null)
 
     try {
-      const url = new URL('/api/suppliers', window.location.origin)
+      const url = new URL(apiUrl('/v1/suppliers'))
       if (search) {
         url.searchParams.set('search', search)
       }
 
-      const response = await fetch(url.toString())
+      const response = await fetch(url.toString(), { credentials: 'include' })
 
       // Handle permission errors silently - just set empty array
       if (response.status === 401 || response.status === 403) {
@@ -62,7 +63,7 @@ export function useSuppliers() {
     setError(null)
 
     try {
-      const response = await fetch(`/api/suppliers/${id}`)
+      const response = await apiFetch(`/v1/suppliers/${id}`)
 
       if (!response.ok) {
         throw new Error('Error al obtener proveedor')
@@ -86,11 +87,8 @@ export function useSuppliers() {
     setError(null)
 
     try {
-      const response = await fetch('/api/suppliers', {
+      const response = await apiFetch('/v1/suppliers', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify(data),
       })
 
@@ -118,11 +116,8 @@ export function useSuppliers() {
     setError(null)
 
     try {
-      const response = await fetch(`/api/suppliers/${id}`, {
+      const response = await apiFetch(`/v1/suppliers/${id}`, {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify(data),
       })
 
@@ -150,7 +145,7 @@ export function useSuppliers() {
     setError(null)
 
     try {
-      const response = await fetch(`/api/suppliers/${id}`, {
+      const response = await apiFetch(`/v1/suppliers/${id}`, {
         method: 'DELETE',
       })
 

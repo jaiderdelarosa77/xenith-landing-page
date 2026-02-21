@@ -64,7 +64,6 @@ export function checkRateLimit(
 
   // Check if blocked
   if (entry.count >= config.maxAttempts) {
-    const blockDuration = config.blockDurationMs || config.windowMs
     return {
       success: false,
       remaining: 0,

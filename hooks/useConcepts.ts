@@ -3,6 +3,7 @@
 import { useCallback } from 'react'
 import { useConceptStore } from '@/store/conceptStore'
 import { ConceptFormData } from '@/lib/validations/concept'
+import { apiFetch, apiUrl } from '@/lib/api/client'
 import toast from 'react-hot-toast'
 
 export function useConcepts() {
@@ -34,13 +35,13 @@ export function useConcepts() {
     setError(null)
 
     try {
-      const url = new URL('/api/concepts', window.location.origin)
+      const url = new URL(apiUrl('/v1/concepts'))
       if (options?.search) url.searchParams.set('search', options.search)
       if (options?.category) url.searchParams.set('category', options.category)
       if (options?.supplierId) url.searchParams.set('supplierId', options.supplierId)
       if (options?.isActive) url.searchParams.set('isActive', options.isActive)
 
-      const response = await fetch(url.toString())
+      const response = await fetch(url.toString(), { credentials: 'include' })
 
       // Handle permission errors silently - just set empty array
       if (response.status === 401 || response.status === 403) {
@@ -70,7 +71,7 @@ export function useConcepts() {
     setError(null)
 
     try {
-      const response = await fetch(`/api/concepts/${id}`)
+      const response = await apiFetch(`/v1/concepts/${id}`)
 
       if (!response.ok) {
         throw new Error('Error al obtener concepto')
@@ -94,11 +95,8 @@ export function useConcepts() {
     setError(null)
 
     try {
-      const response = await fetch('/api/concepts', {
+      const response = await apiFetch('/v1/concepts', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify(data),
       })
 
@@ -126,11 +124,8 @@ export function useConcepts() {
     setError(null)
 
     try {
-      const response = await fetch(`/api/concepts/${id}`, {
+      const response = await apiFetch(`/v1/concepts/${id}`, {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify(data),
       })
 
@@ -158,7 +153,7 @@ export function useConcepts() {
     setError(null)
 
     try {
-      const response = await fetch(`/api/concepts/${id}`, {
+      const response = await apiFetch(`/v1/concepts/${id}`, {
         method: 'DELETE',
       })
 

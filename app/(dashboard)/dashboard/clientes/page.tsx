@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useClients } from '@/hooks/useClients'
 import { usePermissions } from '@/hooks/usePermissions'
@@ -12,7 +11,6 @@ import { Card } from '@/components/ui/Card'
 import { Plus, Search } from 'lucide-react'
 
 export default function ClientsPage() {
-  const router = useRouter()
   const { clients, isLoading, searchQuery, setSearchQuery, fetchClients, deleteClient } = useClients()
   const { canEdit } = usePermissions()
   const [localSearch, setLocalSearch] = useState(searchQuery)

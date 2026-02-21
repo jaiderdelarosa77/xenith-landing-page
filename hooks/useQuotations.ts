@@ -2,7 +2,8 @@
 
 import { useCallback } from 'react'
 import { useQuotationStore } from '@/store/quotationStore'
-import { QuotationFormData, Quotation, QuotationStatus } from '@/lib/validations/quotation'
+import { QuotationFormData, QuotationStatus } from '@/lib/validations/quotation'
+import { apiFetch, apiUrl } from '@/lib/api/client'
 import toast from 'react-hot-toast'
 
 interface FetchQuotationsOptions {
@@ -37,14 +38,14 @@ export function useQuotations() {
     setError(null)
 
     try {
-      const url = new URL('/api/quotations', window.location.origin)
+      const url = new URL(apiUrl('/v1/quotations'))
 
       if (options?.search) url.searchParams.set('search', options.search)
       if (options?.status) url.searchParams.set('status', options.status)
       if (options?.clientId) url.searchParams.set('clientId', options.clientId)
       if (options?.projectId) url.searchParams.set('projectId', options.projectId)
 
-      const response = await fetch(url.toString())
+      const response = await fetch(url.toString(), { credentials: 'include' })
 
       if (!response.ok) {
         throw new Error('Error al obtener cotizaciones')
@@ -66,7 +67,7 @@ export function useQuotations() {
     setError(null)
 
     try {
-      const response = await fetch(`/api/quotations/${id}`)
+      const response = await apiFetch(`/v1/quotations/${id}`)
 
       if (!response.ok) {
         throw new Error('Error al obtener cotización')
@@ -90,11 +91,8 @@ export function useQuotations() {
     setError(null)
 
     try {
-      const response = await fetch('/api/quotations', {
+      const response = await apiFetch('/v1/quotations', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify(data),
       })
 
@@ -122,11 +120,8 @@ export function useQuotations() {
     setError(null)
 
     try {
-      const response = await fetch(`/api/quotations/${id}`, {
+      const response = await apiFetch(`/v1/quotations/${id}`, {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify(data),
       })
 
@@ -154,7 +149,7 @@ export function useQuotations() {
     setError(null)
 
     try {
-      const response = await fetch(`/api/quotations/${id}`, {
+      const response = await apiFetch(`/v1/quotations/${id}`, {
         method: 'DELETE',
       })
 
@@ -179,7 +174,7 @@ export function useQuotations() {
   const downloadPDF = useCallback(async (id: string, quotationNumber: string) => {
     try {
       toast.loading('Generando PDF...')
-      const response = await fetch(`/api/quotations/${id}/pdf`)
+      const response = await fetch(apiUrl(`/v1/quotations/${id}/pdf`), { credentials: 'include' })
 
       if (!response.ok) {
         throw new Error('Error al generar PDF')

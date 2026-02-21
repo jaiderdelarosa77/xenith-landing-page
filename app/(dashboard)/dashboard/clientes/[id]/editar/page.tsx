@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { useClients } from '@/hooks/useClients'
 import { ClientForm } from '@/components/forms/ClientForm'
 import { Card } from '@/components/ui/Card'
-import { ClientFormData } from '@/lib/validations/client'
+import { ClientFormData, Client } from '@/lib/validations/client'
 import { ArrowLeft } from 'lucide-react'
 
 export default function EditClientPage({
@@ -16,8 +16,8 @@ export default function EditClientPage({
 }) {
   const router = useRouter()
   const { id } = use(params)
-  const { currentClient, isLoading, fetchClient, editClient } = useClients()
-  const [clientData, setClientData] = useState<any>(null)
+  const { isLoading, fetchClient, editClient } = useClients()
+  const [clientData, setClientData] = useState<Client | null>(null)
 
   useEffect(() => {
     const loadClient = async () => {

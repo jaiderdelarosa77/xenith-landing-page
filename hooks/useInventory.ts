@@ -3,6 +3,7 @@
 import { useCallback } from 'react'
 import { useInventoryStore } from '@/store/inventoryStore'
 import { InventoryItemFormData, CheckInOutFormData } from '@/lib/validations/inventory'
+import { apiFetch, apiUrl } from '@/lib/api/client'
 import toast from 'react-hot-toast'
 
 export function useInventory() {
@@ -38,13 +39,13 @@ export function useInventory() {
     setError(null)
 
     try {
-      const url = new URL('/api/inventory', window.location.origin)
+      const url = new URL(apiUrl('/v1/inventory'))
       if (options?.search) url.searchParams.set('search', options.search)
       if (options?.status) url.searchParams.set('status', options.status)
       if (options?.type) url.searchParams.set('type', options.type)
       if (options?.productId) url.searchParams.set('productId', options.productId)
 
-      const response = await fetch(url.toString())
+      const response = await fetch(url.toString(), { credentials: 'include' })
 
       // Handle permission errors silently - just set empty array
       if (response.status === 401 || response.status === 403) {
@@ -74,7 +75,7 @@ export function useInventory() {
     setError(null)
 
     try {
-      const response = await fetch(`/api/inventory/${id}`)
+      const response = await apiFetch(`/v1/inventory/${id}`)
 
       if (!response.ok) {
         throw new Error('Error al obtener item de inventario')
@@ -98,11 +99,8 @@ export function useInventory() {
     setError(null)
 
     try {
-      const response = await fetch('/api/inventory', {
+      const response = await apiFetch('/v1/inventory', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify(data),
       })
 
@@ -130,11 +128,8 @@ export function useInventory() {
     setError(null)
 
     try {
-      const response = await fetch(`/api/inventory/${id}`, {
+      const response = await apiFetch(`/v1/inventory/${id}`, {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify(data),
       })
 
@@ -162,7 +157,7 @@ export function useInventory() {
     setError(null)
 
     try {
-      const response = await fetch(`/api/inventory/${id}`, {
+      const response = await apiFetch(`/v1/inventory/${id}`, {
         method: 'DELETE',
       })
 
@@ -189,11 +184,8 @@ export function useInventory() {
     setError(null)
 
     try {
-      const response = await fetch(`/api/inventory/${id}/check-in`, {
+      const response = await apiFetch(`/v1/inventory/${id}/check-in`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify(data || {}),
       })
 
@@ -221,11 +213,8 @@ export function useInventory() {
     setError(null)
 
     try {
-      const response = await fetch(`/api/inventory/${id}/check-out`, {
+      const response = await apiFetch(`/v1/inventory/${id}/check-out`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify(data || {}),
       })
 
@@ -253,7 +242,7 @@ export function useInventory() {
     setError(null)
 
     try {
-      const response = await fetch('/api/inventory/summary')
+      const response = await apiFetch('/v1/inventory/summary')
 
       // Handle permission errors silently - just set null summary
       if (response.status === 401 || response.status === 403) {
@@ -291,13 +280,13 @@ export function useInventory() {
     setError(null)
 
     try {
-      const url = new URL('/api/inventory/movements', window.location.origin)
+      const url = new URL(apiUrl('/v1/inventory/movements'))
       if (options?.type) url.searchParams.set('type', options.type)
       if (options?.inventoryItemId) url.searchParams.set('inventoryItemId', options.inventoryItemId)
       if (options?.limit) url.searchParams.set('limit', options.limit.toString())
       if (options?.offset) url.searchParams.set('offset', options.offset.toString())
 
-      const response = await fetch(url.toString())
+      const response = await fetch(url.toString(), { credentials: 'include' })
 
       // Handle permission errors silently - just set empty array
       if (response.status === 401 || response.status === 403) {

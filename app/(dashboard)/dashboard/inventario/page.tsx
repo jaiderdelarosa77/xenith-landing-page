@@ -20,7 +20,7 @@ import {
 import { useInventory } from '@/hooks/useInventory'
 
 export default function InventarioDashboardPage() {
-  const { summary, fetchSummary, isLoading } = useInventory()
+  const { summary, fetchSummary } = useInventory()
 
   useEffect(() => {
     fetchSummary()

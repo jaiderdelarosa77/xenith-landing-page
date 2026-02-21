@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/Input'
 import { Textarea } from '@/components/ui/Textarea'
 import { Button } from '@/components/ui/Button'
 import { Alert } from '@/components/ui/Alert'
+import { apiFetch } from '@/lib/api/client'
 import toast from 'react-hot-toast'
 
 export function ContactForm() {
@@ -31,11 +32,8 @@ export function ContactForm() {
     setSubmitStatus(null)
 
     try {
-      const response = await fetch('/api/contact', {
+      const response = await apiFetch('/v1/contact', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify(data),
       })
 
@@ -49,7 +47,7 @@ export function ContactForm() {
       })
       toast.success('Mensaje enviado con éxito')
       reset()
-    } catch (error) {
+    } catch {
       setSubmitStatus({
         type: 'error',
         message: 'Hubo un error al enviar el mensaje. Por favor intenta nuevamente.',

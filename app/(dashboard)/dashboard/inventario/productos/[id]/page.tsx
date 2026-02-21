@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
-import { useParams, useRouter } from 'next/navigation'
+import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import { useProducts } from '@/hooks/useProducts'
 import { Card } from '@/components/ui/Card'
@@ -11,17 +11,13 @@ import {
   ArrowLeft,
   Edit,
   Package,
-  Tag,
-  DollarSign,
   Boxes,
   Building2,
   FileText,
-  Image as ImageIcon,
 } from 'lucide-react'
 
 export default function ProductDetailPage() {
   const params = useParams()
-  const router = useRouter()
   const { currentProduct: product, isLoading, fetchProduct } = useProducts()
 
   const productId = params.id as string
@@ -291,6 +287,7 @@ export default function ProductDetailPage() {
           {product.imageUrl && (
             <Card>
               <Card.Content className="p-4">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={product.imageUrl}
                   alt={product.name}

@@ -9,6 +9,12 @@ import { Button } from '@/components/ui/Button'
 import { ArrowLeft, Edit, Mail, Phone, MapPin, Building2, FileText, Trash2, FileDown } from 'lucide-react'
 import { format } from 'date-fns'
 import { es } from 'date-fns/locale'
+import { Client } from '@/lib/validations/client'
+
+type ClientDetail = Client & {
+  projects?: Array<{ id: string; title: string; status: string }>
+  quotations?: Array<{ id: string }>
+}
 
 export default function ClientDetailPage({
   params,
@@ -17,8 +23,8 @@ export default function ClientDetailPage({
 }) {
   const router = useRouter()
   const { id } = use(params)
-  const { currentClient, isLoading, fetchClient, deleteClient } = useClients()
-  const [clientData, setClientData] = useState<any>(null)
+  const { isLoading, fetchClient, deleteClient } = useClients()
+  const [clientData, setClientData] = useState<ClientDetail | null>(null)
 
   useEffect(() => {
     const loadClient = async () => {
@@ -183,7 +189,7 @@ export default function ClientDetailPage({
               </Card.Header>
               <Card.Content>
                 <div className="space-y-3">
-                  {clientData.projects.map((project: any) => (
+                  {clientData.projects.map((project) => (
                     <div
                       key={project.id}
                       className="flex items-center justify-between p-4 rounded-lg bg-gray-800/50 hover:bg-gray-800 transition-colors"

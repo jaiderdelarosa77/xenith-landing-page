@@ -4,15 +4,17 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
-import { signIn } from 'next-auth/react'
 import { loginSchema, LoginFormData } from '@/lib/validations/auth'
+import { apiFetch } from '@/lib/api/client'
 import { Input } from '@/components/ui/Input'
 import { Button } from '@/components/ui/Button'
 import { Alert } from '@/components/ui/Alert'
+import { useAuthStore } from '@/store/authStore'
 import toast from 'react-hot-toast'
 
 export function LoginForm() {
   const router = useRouter()
+  const setUser = useAuthStore((state) => state.setUser)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -29,25 +31,29 @@ export function LoginForm() {
     setError(null)
 
     try {
-      const result = await signIn('credentials', {
-        email: data.email,
-        password: data.password,
-        redirect: false,
+      const response = await apiFetch('/v1/auth/login', {
+        method: 'POST',
+        body: JSON.stringify({
+          email: data.email,
+          password: data.password,
+        }),
       })
+      const result = await response.json()
 
-      if (result?.error) {
-        // Check for specific error types
-        if (result.error.includes('UserInactive')) {
-          setError('Tu cuenta ha sido desactivada. Contacta al administrador.')
-          toast.error('Cuenta desactivada')
-        } else if (result.error.includes('TooManyRequests')) {
-          setError('Demasiados intentos. Por favor espera unos minutos.')
-          toast.error('Demasiados intentos')
-        } else {
-          setError('Credenciales inválidas')
-          toast.error('Error al iniciar sesión')
-        }
+      if (!response.ok) {
+        const message = result?.error?.message || 'Credenciales invalidas'
+        setError(message)
+        toast.error(message)
         return
+      }
+
+      if (result?.user) {
+        setUser({
+          id: result.user.id,
+          email: result.user.email,
+          name: result.user.name || null,
+          image: result.user.image || null,
+        })
       }
 
       toast.success('Inicio de sesión exitoso')

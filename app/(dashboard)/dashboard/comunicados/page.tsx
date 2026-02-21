@@ -1,14 +1,15 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { useSession } from 'next-auth/react'
+import { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { useAuth } from '@/hooks/useAuth'
+import { apiFetch } from '@/lib/api/client'
 import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Textarea } from '@/components/ui/Textarea'
 import { Table } from '@/components/ui/Table'
-import { Mail, Send, UserCheck, UserX, Shield } from 'lucide-react'
+import { Mail, Send, Shield } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { SUPERADMIN_EMAIL, roleLabels, roleColors } from '@/lib/validations/user'
 import { cn } from '@/lib/utils/cn'
@@ -22,7 +23,7 @@ interface User {
 }
 
 export default function ComunicadosPage() {
-  const { data: session, status } = useSession()
+  const { user: authUser, isLoading: authLoading } = useAuth()
   const router = useRouter()
   const [users, setUsers] = useState<User[]>([])
   const [isLoading, setIsLoading] = useState(true)
@@ -33,39 +34,10 @@ export default function ComunicadosPage() {
 
   const [hasAccess, setHasAccess] = useState<boolean | null>(null)
 
-  useEffect(() => {
-    if (status === 'loading') return
-
-    if (!session?.user) {
-      router.push('/dashboard')
-      return
-    }
-
-    // Superadmin always has access
-    if (session.user.email === SUPERADMIN_EMAIL) {
-      setHasAccess(true)
-      fetchUsers()
-      return
-    }
-
-    // Check role from profile
-    fetch('/api/profile')
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.role === 'ADMIN') {
-          setHasAccess(true)
-          fetchUsers()
-        } else {
-          router.push('/dashboard')
-        }
-      })
-      .catch(() => router.push('/dashboard'))
-  }, [session, status, router])
-
-  const fetchUsers = async () => {
+  const fetchUsers = useCallback(async () => {
     try {
       setIsLoading(true)
-      const response = await fetch('/api/users')
+      const response = await apiFetch('/v1/users')
 
       if (!response.ok) {
         if (response.status === 403) {
@@ -83,7 +55,36 @@ export default function ComunicadosPage() {
     } finally {
       setIsLoading(false)
     }
-  }
+  }, [router])
+
+  useEffect(() => {
+    if (authLoading) return
+
+    if (!authUser) {
+      router.push('/dashboard')
+      return
+    }
+
+    // Superadmin always has access
+    if (authUser.email === SUPERADMIN_EMAIL) {
+      setHasAccess(true)
+      fetchUsers()
+      return
+    }
+
+    // Check role from profile
+    apiFetch('/v1/profile')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.role === 'ADMIN') {
+          setHasAccess(true)
+          fetchUsers()
+        } else {
+          router.push('/dashboard')
+        }
+      })
+      .catch(() => router.push('/dashboard'))
+  }, [authUser, authLoading, router, fetchUsers])
 
   const toggleUser = (id: string) => {
     setSelectedIds((prev) => {
@@ -121,9 +122,8 @@ export default function ComunicadosPage() {
     setIsSending(true)
 
     try {
-      const response = await fetch('/api/comunicados', {
+      const response = await apiFetch('/v1/comunicados', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           subject: subject.trim(),
           body: body.trim(),
@@ -134,21 +134,23 @@ export default function ComunicadosPage() {
       const data = await response.json()
 
       if (!response.ok) {
-        throw new Error(data.error || 'Error al enviar el comunicado')
+        const message = typeof data?.error === 'string' ? data.error : data?.error?.message
+        throw new Error(message || 'Error al enviar el comunicado')
       }
 
       toast.success(data.message)
       setSubject('')
       setBody('')
       setSelectedIds(new Set())
-    } catch (error: any) {
-      toast.error(error.message || 'Error al enviar el comunicado')
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Error al enviar el comunicado'
+      toast.error(message)
     } finally {
       setIsSending(false)
     }
   }
 
-  if (status === 'loading' || isLoading) {
+  if (authLoading || isLoading) {
     return (
       <div className="flex items-center justify-center h-96">
         <div className="inline-block w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full animate-spin" />

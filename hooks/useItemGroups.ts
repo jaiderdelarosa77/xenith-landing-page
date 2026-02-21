@@ -3,6 +3,7 @@
 import { useCallback } from 'react'
 import { useItemGroupStore } from '@/store/itemGroupStore'
 import { ItemGroupFormData, AddItemToGroupFormData } from '@/lib/validations/itemGroup'
+import { apiFetch, apiUrl } from '@/lib/api/client'
 import toast from 'react-hot-toast'
 
 export function useItemGroups() {
@@ -31,10 +32,10 @@ export function useItemGroups() {
     setError(null)
 
     try {
-      const url = new URL('/api/item-groups', window.location.origin)
+      const url = new URL(apiUrl('/v1/item-groups'))
       if (options?.search) url.searchParams.set('search', options.search)
 
-      const response = await fetch(url.toString())
+      const response = await fetch(url.toString(), { credentials: 'include' })
 
       // Handle permission errors silently - just set empty array
       if (response.status === 401 || response.status === 403) {
@@ -64,7 +65,7 @@ export function useItemGroups() {
     setError(null)
 
     try {
-      const response = await fetch(`/api/item-groups/${id}`)
+      const response = await apiFetch(`/v1/item-groups/${id}`)
 
       if (!response.ok) {
         throw new Error('Error al obtener grupo')
@@ -88,11 +89,8 @@ export function useItemGroups() {
     setError(null)
 
     try {
-      const response = await fetch('/api/item-groups', {
+      const response = await apiFetch('/v1/item-groups', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify(data),
       })
 
@@ -120,11 +118,8 @@ export function useItemGroups() {
     setError(null)
 
     try {
-      const response = await fetch(`/api/item-groups/${id}`, {
+      const response = await apiFetch(`/v1/item-groups/${id}`, {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify(data),
       })
 
@@ -152,7 +147,7 @@ export function useItemGroups() {
     setError(null)
 
     try {
-      const response = await fetch(`/api/item-groups/${id}`, {
+      const response = await apiFetch(`/v1/item-groups/${id}`, {
         method: 'DELETE',
       })
 
@@ -179,11 +174,8 @@ export function useItemGroups() {
     setError(null)
 
     try {
-      const response = await fetch(`/api/item-groups/${groupId}/items`, {
+      const response = await apiFetch(`/v1/item-groups/${groupId}/items`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify(data),
       })
 
@@ -211,7 +203,7 @@ export function useItemGroups() {
     setError(null)
 
     try {
-      const response = await fetch(`/api/item-groups/${groupId}/items/${itemId}`, {
+      const response = await apiFetch(`/v1/item-groups/${groupId}/items/${itemId}`, {
         method: 'DELETE',
       })
 

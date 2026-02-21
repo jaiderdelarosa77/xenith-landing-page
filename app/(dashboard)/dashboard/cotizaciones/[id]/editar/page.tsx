@@ -15,7 +15,7 @@ export default function EditQuotationPage({
 }) {
   const router = useRouter()
   const { id } = use(params)
-  const { currentQuotation, isLoading, fetchQuotation, editQuotation } = useQuotations()
+  const { isLoading, fetchQuotation, editQuotation } = useQuotations()
   const [quotationData, setQuotationData] = useState<Quotation | null>(null)
 
   useEffect(() => {

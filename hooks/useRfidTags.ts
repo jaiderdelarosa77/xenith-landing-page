@@ -3,6 +3,7 @@
 import { useCallback } from 'react'
 import { useRfidStore } from '@/store/rfidStore'
 import { RfidTagFormData, RfidEnrollmentFormData } from '@/lib/validations/rfid'
+import { apiFetch, apiUrl } from '@/lib/api/client'
 import toast from 'react-hot-toast'
 
 export function useRfidTags() {
@@ -36,11 +37,11 @@ export function useRfidTags() {
     setError(null)
 
     try {
-      const url = new URL('/api/rfid/tags', window.location.origin)
+      const url = new URL(apiUrl('/v1/rfid/tags'))
       if (options?.search) url.searchParams.set('search', options.search)
       if (options?.status) url.searchParams.set('status', options.status)
 
-      const response = await fetch(url.toString())
+      const response = await fetch(url.toString(), { credentials: 'include' })
 
       // Handle permission errors silently - just set empty array
       if (response.status === 401 || response.status === 403) {
@@ -70,7 +71,7 @@ export function useRfidTags() {
     setError(null)
 
     try {
-      const response = await fetch('/api/rfid/tags/unknown')
+      const response = await apiFetch('/v1/rfid/tags/unknown')
 
       // Handle permission errors silently - just set empty array
       if (response.status === 401 || response.status === 403) {
@@ -100,7 +101,7 @@ export function useRfidTags() {
     setError(null)
 
     try {
-      const response = await fetch(`/api/rfid/tags/${id}`)
+      const response = await apiFetch(`/v1/rfid/tags/${id}`)
 
       if (!response.ok) {
         throw new Error('Error al obtener tag RFID')
@@ -124,11 +125,8 @@ export function useRfidTags() {
     setError(null)
 
     try {
-      const response = await fetch('/api/rfid/tags', {
+      const response = await apiFetch('/v1/rfid/tags', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify(data),
       })
 
@@ -156,11 +154,8 @@ export function useRfidTags() {
     setError(null)
 
     try {
-      const response = await fetch(`/api/rfid/tags/${id}`, {
+      const response = await apiFetch(`/v1/rfid/tags/${id}`, {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify(data),
       })
 
@@ -188,7 +183,7 @@ export function useRfidTags() {
     setError(null)
 
     try {
-      const response = await fetch(`/api/rfid/tags/${id}`, {
+      const response = await apiFetch(`/v1/rfid/tags/${id}`, {
         method: 'DELETE',
       })
 
@@ -215,11 +210,8 @@ export function useRfidTags() {
     setError(null)
 
     try {
-      const response = await fetch(`/api/rfid/tags/${id}/enroll`, {
+      const response = await apiFetch(`/v1/rfid/tags/${id}/enroll`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify(data),
       })
 
@@ -247,7 +239,7 @@ export function useRfidTags() {
     setError(null)
 
     try {
-      const response = await fetch(`/api/rfid/tags/${id}/enroll`, {
+      const response = await apiFetch(`/v1/rfid/tags/${id}/enroll`, {
         method: 'DELETE',
       })
 
@@ -281,14 +273,14 @@ export function useRfidTags() {
     setError(null)
 
     try {
-      const url = new URL('/api/rfid/detections', window.location.origin)
+      const url = new URL(apiUrl('/v1/rfid/detections'))
       if (options?.rfidTagId) url.searchParams.set('rfidTagId', options.rfidTagId)
       if (options?.readerId) url.searchParams.set('readerId', options.readerId)
       if (options?.direction) url.searchParams.set('direction', options.direction)
       if (options?.limit) url.searchParams.set('limit', options.limit.toString())
       if (options?.offset) url.searchParams.set('offset', options.offset.toString())
 
-      const response = await fetch(url.toString())
+      const response = await fetch(url.toString(), { credentials: 'include' })
 
       if (!response.ok) {
         throw new Error('Error al obtener detecciones')

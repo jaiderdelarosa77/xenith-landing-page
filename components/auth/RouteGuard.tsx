@@ -84,17 +84,17 @@ export function RouteGuard({ children }: RouteGuardProps) {
       return
     }
 
-    const module = getModuleFromPath(pathname)
+    const routeModule = getModuleFromPath(pathname)
 
     // Si no hay módulo asociado (rutas públicas), permitir acceso
-    if (module === null) {
+    if (routeModule === null) {
       setIsAuthorized(true)
       return
     }
 
     // Verificar permisos
     const needsEdit = requiresEditPermission(pathname)
-    const hasPermission = needsEdit ? canEdit(module) : canView(module)
+    const hasPermission = needsEdit ? canEdit(routeModule) : canView(routeModule)
 
     setIsAuthorized(hasPermission)
 

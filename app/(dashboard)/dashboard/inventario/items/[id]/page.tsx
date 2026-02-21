@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
-import { useParams, useRouter } from 'next/navigation'
+import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import { useInventory } from '@/hooks/useInventory'
 import { Card } from '@/components/ui/Card'
@@ -75,7 +75,6 @@ interface ContentItem {
 
 export default function InventoryItemDetailPage() {
   const params = useParams()
-  const router = useRouter()
   const { currentItem: item, isLoading, fetchItem, checkIn, checkOut } = useInventory()
 
   const itemId = params.id as string

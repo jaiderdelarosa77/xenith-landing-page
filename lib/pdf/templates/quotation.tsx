@@ -2,6 +2,7 @@ import React from 'react'
 import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer'
 import { format } from 'date-fns'
 import { es } from 'date-fns/locale'
+import { Quotation, QuotationGroupItem, QuotationItem } from '@/lib/validations/quotation'
 
 const styles = StyleSheet.create({
   page: {
@@ -185,7 +186,7 @@ const styles = StyleSheet.create({
 })
 
 interface QuotationPDFProps {
-  quotation: any
+  quotation: Quotation
 }
 
 export function QuotationPDFDocument({ quotation }: QuotationPDFProps) {
@@ -198,7 +199,7 @@ export function QuotationPDFDocument({ quotation }: QuotationPDFProps) {
     }).format(value)
   }
 
-  const getItemInventoryDetails = (item: any) => {
+  const getItemInventoryDetails = (item: QuotationItem) => {
     if (!item.inventoryItem) return null
     const inv = item.inventoryItem
     const parts = []
@@ -208,26 +209,26 @@ export function QuotationPDFDocument({ quotation }: QuotationPDFProps) {
     return parts.length > 0 ? parts.join(' | ') : null
   }
 
-  const getGroupItemsList = (group: any) => {
+  const getGroupItemsList = (group: QuotationGroupItem) => {
     if (!group.group?.items || group.group.items.length === 0) return null
     return group.group.items
-      .map((item: any) => item.inventoryItem?.product?.name || 'Item')
+      .map((item) => item.inventoryItem?.product?.name || 'Item')
       .join(', ')
   }
 
   // Combine items and groups for display, sorted by order
-  const allLineItems: { type: 'item' | 'group'; data: any; order: number }[] = []
+  const allLineItems: Array<{ type: 'item'; data: QuotationItem; order: number } | { type: 'group'; data: QuotationGroupItem; order: number }> = []
 
   // Add items
   if (quotation.items) {
-    quotation.items.forEach((item: any) => {
+    quotation.items.forEach((item) => {
       allLineItems.push({ type: 'item', data: item, order: item.order || 0 })
     })
   }
 
   // Add groups
   if (quotation.groups) {
-    quotation.groups.forEach((group: any) => {
+    quotation.groups.forEach((group) => {
       allLineItems.push({ type: 'group', data: group, order: group.order || 0 })
     })
   }

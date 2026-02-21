@@ -27,7 +27,7 @@ export default function ProjectDetailPage({
 }) {
   const router = useRouter()
   const { id } = use(params)
-  const { currentProject, isLoading, fetchProject, deleteProject } = useProjects()
+  const { isLoading, fetchProject, deleteProject } = useProjects()
   const [projectData, setProjectData] = useState<Project | null>(null)
 
   useEffect(() => {
@@ -198,7 +198,7 @@ export default function ProjectDetailPage({
               </Card.Header>
               <Card.Content>
                 <div className="space-y-3">
-                  {projectData.tasks.map((task: any) => (
+                  {projectData.tasks.map((task) => (
                     <div
                       key={task.id}
                       className="p-4 rounded-lg bg-gray-800/50 border border-gray-700/50"
@@ -245,7 +245,7 @@ export default function ProjectDetailPage({
               </Card.Header>
               <Card.Content>
                 <div className="space-y-3">
-                  {projectData.quotations.map((quotation: any) => (
+                  {projectData.quotations.map((quotation) => (
                     <div
                       key={quotation.id}
                       className="flex items-center justify-between p-4 rounded-lg bg-gray-800/50 hover:bg-gray-800 transition-colors"

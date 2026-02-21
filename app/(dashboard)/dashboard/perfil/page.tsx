@@ -8,6 +8,7 @@ import { toast } from 'react-hot-toast'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/Card'
 import { Input } from '@/components/ui/Input'
 import { Button } from '@/components/ui/Button'
+import { apiFetch } from '@/lib/api/client'
 import { changePasswordSchema, ChangePasswordFormData, roleLabels, roleColors, UserRole } from '@/lib/validations/user'
 import { cn } from '@/lib/utils/cn'
 
@@ -43,7 +44,7 @@ export default function PerfilPage() {
 
   const fetchProfile = async () => {
     try {
-      const response = await fetch('/api/profile')
+      const response = await apiFetch('/v1/profile')
       if (!response.ok) {
         throw new Error('Error al cargar perfil')
       }
@@ -59,9 +60,8 @@ export default function PerfilPage() {
 
   const onSubmitPassword = async (data: ChangePasswordFormData) => {
     try {
-      const response = await fetch('/api/profile/change-password', {
+      const response = await apiFetch('/v1/profile/change-password', {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       })
 

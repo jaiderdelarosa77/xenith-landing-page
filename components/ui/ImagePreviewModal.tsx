@@ -125,6 +125,7 @@ export function ImagePreviewModal({
 
       {/* Image container */}
       <div className="relative max-w-[90vw] max-h-[85vh] overflow-hidden">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={imageUrl}
           alt={alt}

@@ -11,6 +11,7 @@ import { Search, RotateCw } from 'lucide-react'
 import { format } from 'date-fns'
 import { es } from 'date-fns/locale'
 import toast from 'react-hot-toast'
+import { apiUrl } from '@/lib/api/client'
 
 type AuditLog = {
   id: string
@@ -64,7 +65,7 @@ export default function HistorialPage() {
   const fetchLogs = useCallback(async (searchValue: string, actionValue: string) => {
     setIsLoading(true)
     try {
-      const url = new URL('/api/audit', window.location.origin)
+      const url = new URL(apiUrl('/v1/audit'))
       if (searchValue) {
         url.searchParams.set('search', searchValue)
       }
@@ -73,14 +74,14 @@ export default function HistorialPage() {
       }
       url.searchParams.set('limit', '150')
 
-      const response = await fetch(url.toString())
+      const response = await fetch(url.toString(), { credentials: 'include' })
       if (!response.ok) {
         throw new Error('No se pudo cargar el historial')
       }
 
       const data = await response.json()
       setLogs(data)
-    } catch (error) {
+    } catch {
       toast.error('Error al cargar el historial')
     } finally {
       setIsLoading(false)

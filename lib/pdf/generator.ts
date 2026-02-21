@@ -1,7 +1,8 @@
 import ReactPDF from '@react-pdf/renderer'
 import { QuotationPDFDocument } from './templates/quotation'
+import { Quotation } from '@/lib/validations/quotation'
 
-export async function generateQuotationPDF(quotation: any): Promise<Buffer> {
+export async function generateQuotationPDF(quotation: Quotation): Promise<Buffer> {
   const doc = QuotationPDFDocument({ quotation })
   const pdfStream = await ReactPDF.renderToStream(doc)
 

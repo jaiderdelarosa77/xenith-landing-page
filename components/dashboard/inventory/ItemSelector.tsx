@@ -4,9 +4,10 @@ import { useState, useEffect, useCallback } from 'react'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Card } from '@/components/ui/Card'
-import { Search, Plus, Filter, X, Package } from 'lucide-react'
+import { Search, Plus, Filter, Package } from 'lucide-react'
 import { InventoryItem } from '@/lib/validations/inventory'
 import { cn } from '@/lib/utils/cn'
+import { apiUrl } from '@/lib/api/client'
 
 interface Category {
   id: string
@@ -37,7 +38,7 @@ export function ItemSelector({ onAddItem, excludeItemIds = [], isLoading }: Item
 
   const fetchCategories = useCallback(async () => {
     try {
-      const response = await fetch('/api/categories')
+      const response = await fetch(apiUrl('/v1/categories'), { credentials: 'include' })
       if (response.ok) {
         const data = await response.json()
         setCategories(data)
@@ -50,10 +51,10 @@ export function ItemSelector({ onAddItem, excludeItemIds = [], isLoading }: Item
   const fetchItems = useCallback(async () => {
     setLoadingItems(true)
     try {
-      const url = new URL('/api/inventory', window.location.origin)
+      const url = new URL(apiUrl('/v1/inventory'))
       if (search) url.searchParams.set('search', search)
 
-      const response = await fetch(url.toString())
+      const response = await fetch(url.toString(), { credentials: 'include' })
       if (response.ok) {
         const data = await response.json()
         setItems(data)

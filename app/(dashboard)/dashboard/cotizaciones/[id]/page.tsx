@@ -13,7 +13,6 @@ import {
   Trash2,
   Download,
   User,
-  Building2,
   Mail,
   Calendar,
   FileText,
@@ -36,7 +35,7 @@ export default function QuotationDetailPage({
 }) {
   const router = useRouter()
   const { id } = use(params)
-  const { currentQuotation, isLoading, fetchQuotation, deleteQuotation, downloadPDF } =
+  const { isLoading, fetchQuotation, deleteQuotation, downloadPDF } =
     useQuotations()
   const [quotationData, setQuotationData] = useState<Quotation | null>(null)
 

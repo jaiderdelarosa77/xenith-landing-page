@@ -17,8 +17,20 @@ import { Textarea } from '@/components/ui/Textarea'
 import { Select } from '@/components/ui/Select'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
+import { apiFetch } from '@/lib/api/client'
 import { Plus, Trash2, Search, Package, Package2, X, ChevronDown, ChevronUp } from 'lucide-react'
 import { format, addDays } from 'date-fns'
+
+type ClientOption = {
+  id: string
+  name: string
+  company?: string | null
+}
+
+type ProjectOption = {
+  id: string
+  title: string
+}
 
 interface QuotationFormProps {
   quotation?: Quotation | null
@@ -41,8 +53,8 @@ export function QuotationForm({
   onCancel,
   isSubmitting = false,
 }: QuotationFormProps) {
-  const [clients, setClients] = useState<any[]>([])
-  const [projects, setProjects] = useState<any[]>([])
+  const [clients, setClients] = useState<ClientOption[]>([])
+  const [projects, setProjects] = useState<ProjectOption[]>([])
   const [inventoryItems, setInventoryItems] = useState<InventoryItem[]>([])
   const [itemGroups, setItemGroups] = useState<ItemGroup[]>([])
   const [loadingData, setLoadingData] = useState(true)
@@ -59,7 +71,6 @@ export function QuotationForm({
     handleSubmit,
     control,
     watch,
-    setValue,
     formState: { errors },
   } = useForm<QuotationFormData>({
     resolver: zodResolver(quotationSchema),
@@ -138,10 +149,10 @@ export function QuotationForm({
     const fetchData = async () => {
       try {
         const [clientsRes, projectsRes, inventoryRes, groupsRes] = await Promise.all([
-          fetch('/api/clients'),
-          fetch('/api/projects'),
-          fetch('/api/inventory?status=IN'),
-          fetch('/api/item-groups'),
+          apiFetch('/v1/clients'),
+          apiFetch('/v1/projects'),
+          apiFetch('/v1/inventory?status=IN'),
+          apiFetch('/v1/item-groups'),
         ])
 
         if (clientsRes.ok) {

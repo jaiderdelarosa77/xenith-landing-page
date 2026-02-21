@@ -10,7 +10,7 @@ import { Input } from '@/components/ui/Input'
 import { Select } from '@/components/ui/Select'
 import { Card } from '@/components/ui/Card'
 import { Plus, Search, Filter } from 'lucide-react'
-import { statusLabels, priorityLabels, ProjectStatus, Priority } from '@/lib/validations/project'
+import { statusLabels, priorityLabels } from '@/lib/validations/project'
 
 export default function ProjectsPage() {
   const { projects, isLoading, searchQuery, filters, setSearchQuery, setFilters, fetchProjects, deleteProject } = useProjects()

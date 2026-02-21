@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { useProjects } from '@/hooks/useProjects'
 import { ProjectForm } from '@/components/forms/ProjectForm'
 import { Card } from '@/components/ui/Card'
-import { ProjectFormData } from '@/lib/validations/project'
+import { Project, ProjectFormData } from '@/lib/validations/project'
 import { ArrowLeft } from 'lucide-react'
 
 export default function EditProjectPage({
@@ -16,8 +16,8 @@ export default function EditProjectPage({
 }) {
   const router = useRouter()
   const { id } = use(params)
-  const { currentProject, isLoading, fetchProject, editProject } = useProjects()
-  const [projectData, setProjectData] = useState<any>(null)
+  const { isLoading, fetchProject, editProject } = useProjects()
+  const [projectData, setProjectData] = useState<Project | null>(null)
 
   useEffect(() => {
     const loadProject = async () => {

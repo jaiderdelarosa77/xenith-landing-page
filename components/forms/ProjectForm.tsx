@@ -9,8 +9,21 @@ import { Textarea } from '@/components/ui/Textarea'
 import { Select } from '@/components/ui/Select'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
+import { apiFetch } from '@/lib/api/client'
 import { format } from 'date-fns'
 import { Plus, Trash2, ListTodo, Mail } from 'lucide-react'
+
+type ClientOption = {
+  id: string
+  name: string
+  company?: string | null
+}
+
+type UserOption = {
+  id: string
+  name?: string | null
+  email: string
+}
 
 interface ProjectFormProps {
   project?: Project | null
@@ -25,8 +38,8 @@ export function ProjectForm({
   onCancel,
   isSubmitting = false,
 }: ProjectFormProps) {
-  const [clients, setClients] = useState<any[]>([])
-  const [users, setUsers] = useState<any[]>([])
+  const [clients, setClients] = useState<ClientOption[]>([])
+  const [users, setUsers] = useState<UserOption[]>([])
   const [loadingData, setLoadingData] = useState(true)
 
   const {
@@ -75,8 +88,8 @@ export function ProjectForm({
     const fetchData = async () => {
       try {
         const [clientsRes, usersRes] = await Promise.all([
-          fetch('/api/clients'),
-          fetch('/api/users'),
+          apiFetch('/v1/clients'),
+          apiFetch('/v1/users'),
         ])
 
         if (clientsRes.ok) {

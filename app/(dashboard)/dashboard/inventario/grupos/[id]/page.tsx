@@ -7,7 +7,6 @@ import { useItemGroups } from '@/hooks/useItemGroups'
 import { GroupItemsList } from '@/components/dashboard/inventory/GroupItemsList'
 import { ItemSelector } from '@/components/dashboard/inventory/ItemSelector'
 import { Button } from '@/components/ui/Button'
-import { Card } from '@/components/ui/Card'
 import { ArrowLeft, Edit, Package2, Calendar } from 'lucide-react'
 
 export default function ItemGroupDetailPage() {

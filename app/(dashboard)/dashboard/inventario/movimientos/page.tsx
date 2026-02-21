@@ -4,9 +4,6 @@ import { useEffect, useState } from 'react'
 import { useInventory } from '@/hooks/useInventory'
 import { MovementsTable } from '@/components/dashboard/inventory/MovementsTable'
 import { Card } from '@/components/ui/Card'
-import { Input } from '@/components/ui/Input'
-import { Button } from '@/components/ui/Button'
-import { Search } from 'lucide-react'
 
 export default function MovementsPage() {
   const { movements, isLoading, fetchMovements } = useInventory()
